@@ -5,7 +5,21 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
 var routes = require('./server/routes');
+//var xFrameOptions = require('x-frame-options');
+//var helmet = require('helmet');
+
 var app = express();
+
+// TODO: Some Middlewares to avoid headers exploits.
+/*
+app.use(xFrameOptions());
+app.use(helmet());
+
+app.get('/', function (req, res, next) {
+    res.get('X-Frame-Options');
+    next();
+});
+*/
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
