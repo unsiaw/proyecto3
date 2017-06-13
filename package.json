@@ -12,9 +12,12 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "express-jwt": "^5.3.0",
     "helmet": "^3.6.1",
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^4.10.5",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "x-frame-options": "^1.0.0"
   },
   "devDependencies": {
