@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
@@ -23,7 +22,6 @@ app.get('/', function (req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 // First, search on static/angularJS files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'client')));
