@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var User = require('./model');
 
+// TODO: Sanitizar para evitar inyecciones!
 exports.list_all = function(req, res) {
-    // Habria que sacar el hash y la password. Info sensible.
-    User.find({}, function(err, user) {
+    User.find({},'-salt -hash',function(err, user) {
         if (err)
             res.send(err);
         res.json(user);
@@ -20,10 +20,11 @@ exports.list_one = function(req, res) {
 
 exports.create_user = function(req, res) {
     var new_user = new User(req.body);
+    new_user.setPassword(req.body.password);
     new_user.save(function(err, user) {
         if (err)
             res.send(err);
-        res.json(user);
+        res.json({id: user._id, name: user.name, email: user.email});
     });
 };
 
@@ -41,6 +42,6 @@ exports.delete_user = function(req, res) {
     }, function(err, user) {
         if (err)
             res.send(err);
-        res.json({ message: 'Task successfully deleted' });
+        res.json({ message: 'User successfully deleted' });
     });
 };
