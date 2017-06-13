@@ -10,13 +10,11 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// First, search on static/angularJS files
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, 'client')));
+// Then, search for the rest of the routes.
 app.use('/', routes);
-
-app.get('/home', function(req, res){
-    res.send('hello world');
-});
 
 // Connect to MongoDB
 mongoose.connect(config.database);
