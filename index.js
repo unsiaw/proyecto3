@@ -3,7 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config');
-var routes = require('./server/routes.js');
+var routes = require('./server/routes');
 
 var app = express();
 
@@ -13,8 +13,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', routes);
 
-app.get('/', function(req, res){
+app.get('/home', function(req, res){
     res.send('hello world');
 });
 
