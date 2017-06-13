@@ -19,12 +19,12 @@ exports.list_one = function(req, res) {
 };
 
 exports.create_user = function(req, res) {
-    var new_user = new User(req.body);
+    var new_user = new User({name: req.body.name, email: req.body.email, admin: false});
     new_user.setPassword(req.body.password);
     new_user.save(function(err, user) {
         if (err)
             res.send(err);
-        res.json({id: user._id, name: user.name, email: user.email});
+        res.json({id: user._id, name: user.name, email: user.email, admin: user.admin});
     });
 };
 
