@@ -1,7 +1,7 @@
 var maps = angular.module('maps', ['ngRoute', 'ngMap', 'navbar']);
 
-maps.config(['$routeProvider',
-    function($routeProvider) {
+maps.config(['$routeProvider', '$locationProvider',
+    function($routeProvider, $locationProvider) {
         $routeProvider
             .when('/login', {
                 templateUrl: 'views/login.html',
@@ -18,6 +18,8 @@ maps.config(['$routeProvider',
             .otherwise({
                 redirectTo: '/'
             });
+        $locationProvider.html5Mode(true);
+        $locationProvider.hashPrefix('');
     }]);
 
 maps.controller('mapController', function($scope, $location, NgMap) {
