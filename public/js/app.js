@@ -2,18 +2,22 @@ var maps = angular.module('maps', ['ngRoute', 'ngMap', 'navbar']);
 
 maps.config(['$routeProvider',
     function($routeProvider) {
-        $routeProvider.
-        when('/login', {
-            templateUrl: 'views/login.html',
-            controller: 'LoginCtrl'
-        }).
-        when('/register', {
-            templateUrl: 'views/register.html',
-            controller: 'registerCtrl'
-        }).
-        otherwise({
-            redirectTo: '/'
-        });
+        $routeProvider
+            .when('/login', {
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl'
+            })
+            .when('/register', {
+                templateUrl: 'views/register.html',
+                controller: 'registerCtrl'
+            })
+            .when('/map', {
+                templateUrl: 'views/map.html',
+                controller: 'mapController'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
     }]);
 
 maps.controller('mapController', function($scope, $location, NgMap) {
