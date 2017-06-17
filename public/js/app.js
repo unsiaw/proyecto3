@@ -1,4 +1,4 @@
-var maps = angular.module('maps', ['ngRoute', 'ngMap']);
+var maps = angular.module('maps', ['ngRoute', 'ngMap', 'navbar']);
 
 maps.config(['$routeProvider',
     function($routeProvider) {
