@@ -11,7 +11,7 @@ module.exports.register = function(req, res) {
 
     if(!req.body.name || !req.body.email || !req.body.password) {
         sendJSONresponse(res, 400, {
-            "message": "All fields required"
+            message: "Faltan completar campos"
         });
         return;
     }
@@ -36,9 +36,10 @@ module.exports.register = function(req, res) {
 
 module.exports.login = function(req, res) {
 
+
     if(!req.body.email || !req.body.password) {
         sendJSONresponse(res, 400, {
-            "message": "All fields required"
+            message: "Faltan completar campos"
         });
         return;
     }
@@ -48,7 +49,9 @@ module.exports.login = function(req, res) {
 
         // If Passport throws/catches an error
         if (err) {
-            res.status(404).json(err);
+            res.status(404).json({
+                message: "Ocurrió un error inesperado"
+            });
             return;
         }
 
@@ -61,7 +64,9 @@ module.exports.login = function(req, res) {
             });
         } else {
             // If user wasn't found
-            res.status(401).json(info);
+            res.status(401).json({
+                message: "Usuario no existe o contraseña incorrecta"
+            });
         }
     })(req, res);
 };
