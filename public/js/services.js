@@ -1,4 +1,4 @@
-mainApp.service('AuthService', ['$http', '$window', function($http, $window) {
+mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http, $window, jwtHelper) {
 
     return {
         currentUser : currentUser,
@@ -11,26 +11,17 @@ mainApp.service('AuthService', ['$http', '$window', function($http, $window) {
     };
 
     function saveToken(token) {
-        console.log("Haciendo saveToken");
         $window.localStorage['mean-token'] = token;
     };
 
     function getToken() {
-        console.log("Haciendo getToken");
         return $window.localStorage['mean-token'];
     };
 
     function isLoggedIn() {
-        console.log("Chequeando isLoggedIn");
         let token = getToken();
-        let payload;
-
         if(token){
-            payload = token.split('.')[1];
-            payload = $window.atob(payload);
-            payload = JSON.parse(payload);
-
-            return payload.exp > Date.now() / 1000;
+            return jwtHelper.isTokenExpired(token);
         } else {
             return false;
         }
@@ -39,30 +30,24 @@ mainApp.service('AuthService', ['$http', '$window', function($http, $window) {
     function currentUser() {
         if(isLoggedIn()){
             let token = getToken();
-            let payload = token.split('.')[1];
-            payload = $window.atob(payload);
-            payload = JSON.parse(payload);
-            return {
-                email : payload.email,
-                name : payload.name,
-                admin: payload.admin
-            };
-        }
+            return jwtHelper.decodeToken(token);
+        } else return null;
     };
 
     function register(user) {
         return $http.post('/auth/register', user).then(function(data){
-            saveToken(data.token);
+            saveToken(data.data.token);
         });
     };
 
     function login(user) {
         return $http.post('/auth/login', user).then(function(data) {
-            saveToken(data.token);
+            saveToken(data.data.token);
         });
     };
 
     function logout() {
+        localStorage.removeItem('mean-token');
         $window.localStorage.removeItem('mean-token');
     };
 }]);

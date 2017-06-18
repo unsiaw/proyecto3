@@ -36,6 +36,7 @@ userSchema.methods.generateJwt = function() {
         _id: this._id,
         email: this.email,
         name: this.name,
+        admin: this.admin,
         exp: parseInt(expiry.getTime() / 1000),
     }, config.session.secret_key);
 };

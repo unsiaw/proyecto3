@@ -40,3 +40,16 @@ mainApp.controller('registerCtrl', ['$scope', '$location', 'Flash', 'AuthService
             });
     };
 }]);
+
+mainApp.controller('navCtrl', ['$scope', '$http', '$rootScope', 'AuthService', function($scope, $http, $rootScope, AuthService) {
+    $scope.isLoggedIn = function() {
+        $http.get('/auth/mefromtoken')
+            .success(function(data) {
+                console.log(data);
+                $rootScope.loggedIn = data;
+            })
+            .error(function(data) {
+                console.log('error: ' + data);
+            });
+    };
+}]);

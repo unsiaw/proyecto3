@@ -15,5 +15,6 @@ router.get('/profile', auth, AuthController.load_profile);
 // authentication
 router.post('/register', AuthController.register);
 router.post('/login', AuthController.login);
+router.post('/mefromtoken', AuthController.me_from_token);
 
 module.exports = router;

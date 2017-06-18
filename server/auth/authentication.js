@@ -1,10 +1,37 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var config = require('../../config');
 var User = mongoose.model('User');
 
 var sendJSONresponse = function(res, status, content) {
     res.status(status);
     res.json(content);
+};
+
+module.exports.me_from_token = function (req, res) {
+
+    let token = req.body.token;
+    if(!req.body.token) {
+        sendJSONresponse(res, 400, { message: "No se recibió token" });
+        return;
+    }
+
+    jwt.verify(token, config.session.secret_key, function(err, user) {
+        if (err) {
+            sendJSONresponse(res, 400, { message: "Token expirado" });
+            return;
+        }
+
+        User.findOne({ _id: user._id },'-hash -salt', function (err, user) {
+            var token;
+            token = user.generateJwt();
+            res.status(200);
+            res.json({
+                "token" : token
+            });
+        });
+    })
 };
 
 module.exports.register = function(req, res) {
