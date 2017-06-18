@@ -1,29 +1,32 @@
-<div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-    <form role="form" class="form-signin" ng-submit="onSubmit(rc.credentials)" novalidate>
-        <h3 class="form-signin-heading">Registro <small>Ingrese la información solicitada</small></h3>
-        <hr class="colorgraph">
-        <div class="form-group">
-            <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name">
-        </div>
-        <div class="form-group">
-            <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="2"ng-model="rc.credentials.email">
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Contraseña" tabindex="3" ng-model="rc.credentials.password">
+<div ng-include="'views/partials/navbar.html'" ng-controller="navCtrl as nc"></div>
+<div class="container">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <form role="form" class="form-signin" ng-submit="onSubmit(rc.credentials)" novalidate>
+            <h3 class="form-signin-heading">Registro <small>Ingrese la información solicitada</small></h3>
+            <hr class="colorgraph">
+            <div class="form-group">
+                <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name">
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="2"ng-model="rc.credentials.email">
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Contraseña" tabindex="3" ng-model="rc.credentials.password">
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Repetir contraseña" tabindex="4">
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Repetir contraseña" tabindex="4">
-                </div>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><input type="submit" value="Registrarse" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>
+                <div class="col-xs-12 col-md-6"><a href="/login" class="btn btn-success btn-block btn-lg">Ya tengo cuenta</a></div>
             </div>
-        </div>
-        <hr class="colorgraph">
-        <div class="row">
-            <div class="col-xs-12 col-md-6"><input type="submit" value="Registrarse" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>
-            <div class="col-xs-12 col-md-6"><a href="/login" class="btn btn-success btn-block btn-lg">Ya tengo cuenta</a></div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

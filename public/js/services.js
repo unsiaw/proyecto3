@@ -1,10 +1,9 @@
-mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http, $window, jwtHelper) {
+mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', 'authManager', function($http, $window, jwtHelper, authManager) {
 
     return {
         currentUser : currentUser,
         saveToken : saveToken,
         getToken : getToken,
-        isLoggedIn : isLoggedIn,
         register : register,
         login : login,
         logout : logout
@@ -12,29 +11,14 @@ mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http,
 
     function saveToken(token) {
         $window.localStorage['mean-token'] = token;
-    };
+    }
 
     function getToken() {
         return $window.localStorage['mean-token'];
-    };
-
-    function isLoggedIn() {
-        var token = getToken();
-        var payload;
-
-        if(token){
-            payload = token.split('.')[1];
-            payload = $window.atob(payload);
-            payload = JSON.parse(payload);
-
-            return payload.exp > Date.now() / 1000;
-        } else {
-            return false;
-        }
-    };
+    }
 
     function currentUser() {
-        if(isLoggedIn()){
+        if(authManager.isAuthenticated()){
             var token = getToken();
             var payload = token.split('.')[1];
             payload = $window.atob(payload);
@@ -45,23 +29,26 @@ mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http,
                 admin: payload.admin
             };
         } else return null;
-    };
+    }
 
     function register(user) {
         return $http.post('/auth/register', user).then(function(data){
             saveToken(data.data.token);
+            authManager.authenticate();
         });
-    };
+    }
 
     function login(user) {
         return $http.post('/auth/login', user).then(function(data) {
             saveToken(data.data.token);
+            authManager.authenticate();
         });
-    };
+    }
 
     function logout() {
-        console.log("AuthService.logout");
+        authManager.unauthenticate();
+        // Revisar tema de porqué no se está borrando del item del localStorage
         localStorage.removeItem('mean-token');
         $window.localStorage.removeItem('mean-token');
-    };
+    }
 }]);

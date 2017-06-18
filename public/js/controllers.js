@@ -11,7 +11,6 @@ mainApp.controller('loginCtrl', ['$scope', '$location', 'Flash', 'AuthService', 
         password: ""
     };
     $scope.onSubmit = function (credentials) {
-        console.log("Submiteando");
         AuthService
             .login(credentials)
             .then(function () {
@@ -41,14 +40,11 @@ mainApp.controller('registerCtrl', ['$scope', '$location', 'Flash', 'AuthService
     };
 }]);
 
-mainApp.controller('navCtrl', ['$scope', '$location', 'Flash', 'AuthService', function($scope, $location, $http, AuthService) {
-    var vm = this;
-    vm.isLoggedIn = AuthService.isLoggedIn();
-    vm.currentUser = AuthService.currentUser();
+mainApp.controller('navCtrl', ['$rootScope', '$scope', '$location', 'AuthService', function($rootScope, $scope, $location, AuthService) {
+    $rootScope.currentUser = AuthService.currentUser();
 
     $scope.onLogout = function() {
-        console.log("navCtrl.onLogout");
         AuthService.logout();
-        $scope.$apply();
+        $location.path('/');
     };
 }]);

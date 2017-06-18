@@ -16,9 +16,7 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
             .when('/map', {
                 templateUrl: 'views/map.html',
                 controller: 'mapCtrl',
-                data: {
-                    requiresLogin: true
-                }
+                requiresLogin: true
             })
             .when('/about', {
                 templateUrl: 'views/about.html'
@@ -29,23 +27,35 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
             .when('/credits', {
                 templateUrl: 'views/credits.html'
             })
+            .when('/', {
+                templateUrl: 'views/index.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('');
+
         jwtOptionsProvider.config({
             tokenGetter: ['options', function(options) {
                 return localStorage.getItem('mean-token');
+            }],
+            unauthenticatedRedirectPath: '/login',
+            unauthenticatedRedirector: ['$location', function($location) {
+                $location.path('/login')
             }]
         });
+
     }]);
 
 mainApp.run(['$rootScope', '$location', 'AuthService', 'authManager', function($rootScope, $location, AuthService, authManager) {
-    //authManager.checkAuthOnRefresh();
+    authManager.checkAuthOnRefresh();
+    authManager.redirectWhenUnauthenticated();
+    /*
     $rootScope.$on('$routeChangeStart', function(event, nextRoute, currentRoute) {
         if ($location.path() === '/map' && !AuthService.isLoggedIn()) {
             $location.path('/');
         }
     });
+    */
 }]);
