@@ -19,9 +19,15 @@ mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http,
     };
 
     function isLoggedIn() {
-        let token = getToken();
+        var token = getToken();
+        var payload;
+
         if(token){
-            return jwtHelper.isTokenExpired(token);
+            payload = token.split('.')[1];
+            payload = $window.atob(payload);
+            payload = JSON.parse(payload);
+
+            return payload.exp > Date.now() / 1000;
         } else {
             return false;
         }
@@ -29,8 +35,15 @@ mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http,
 
     function currentUser() {
         if(isLoggedIn()){
-            let token = getToken();
-            return jwtHelper.decodeToken(token);
+            var token = getToken();
+            var payload = token.split('.')[1];
+            payload = $window.atob(payload);
+            payload = JSON.parse(payload);
+            return {
+                email: payload.email,
+                name: payload.name,
+                admin: payload.admin
+            };
         } else return null;
     };
 
@@ -47,6 +60,7 @@ mainApp.service('AuthService', ['$http', '$window', 'jwtHelper', function($http,
     };
 
     function logout() {
+        console.log("AuthService.logout");
         localStorage.removeItem('mean-token');
         $window.localStorage.removeItem('mean-token');
     };

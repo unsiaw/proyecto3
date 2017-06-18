@@ -41,15 +41,14 @@ mainApp.controller('registerCtrl', ['$scope', '$location', 'Flash', 'AuthService
     };
 }]);
 
-mainApp.controller('navCtrl', ['$scope', '$http', '$rootScope', 'AuthService', function($scope, $http, $rootScope, AuthService) {
-    $scope.isLoggedIn = function() {
-        $http.get('/auth/mefromtoken')
-            .success(function(data) {
-                console.log(data);
-                $rootScope.loggedIn = data;
-            })
-            .error(function(data) {
-                console.log('error: ' + data);
-            });
+mainApp.controller('navCtrl', ['$scope', '$location', 'Flash', 'AuthService', function($scope, $location, $http, AuthService) {
+    var vm = this;
+    vm.isLoggedIn = AuthService.isLoggedIn();
+    vm.currentUser = AuthService.currentUser();
+
+    $scope.onLogout = function() {
+        console.log("navCtrl.onLogout");
+        AuthService.logout();
+        $scope.$apply();
     };
 }]);
