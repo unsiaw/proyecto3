@@ -10,8 +10,8 @@
                     placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name" required>
                 <div class="custom-error" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">No válido:
                     <span ng-show="registerForm.name.$error.required">Ingrese un Nombre.</span>
-                            <span class="error" ng-show="registerForm.name.$error.minlength">Muy corto!</span>
-                            <span class="error" ng-show="registerForm.name.$error.maxlength">Muy largo!</span>
+                    <span class="error" ng-show="registerForm.name.$error.minlength">Muy corto!</span>
+                    <span class="error" ng-show="registerForm.name.$error.maxlength">Muy largo!</span>
                 </div>
             </div>
             <div class="form-group">
@@ -44,6 +44,7 @@
                         </div>-->
                         <div class="custom-error" ng-show="registerForm.password_confirmation.$dirty && registerForm.password_confirmation.$invalid">
                             <span ng-show="registerForm.password_confirmation.$error.required"> Confirme el password.</span>
+                            <span ng-show="registerForm.password_confirmation.$error.pattern"> No coincide con la contraseña ingresada.</span>
                         </div>
                     </div>
                 </div>
