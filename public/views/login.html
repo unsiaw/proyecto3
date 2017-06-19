@@ -2,17 +2,17 @@
 <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
         <flash-message></flash-message>
-        <form name="Login_Form" class="form-signin" ng-submit="onSubmit(lc.credentials)" novalidate>
+        <form name="Login_Form" class="form-signin" ng-submit="Login_Form.$valid && onSubmit(lc.credentials)" novalidate>
             <h3 class="form-signin-heading">Conectarse <small>Ingrese su usuario y contraseña.</small></h3>
             <hr class="colorgraph">
             <div class="form-group">
-                <input type="text" class="form-control" name="Usuario" placeholder="Email" required="" autofocus="" ng-model="lc.credentials.email"/>
+                <input type="email" class="form-control ng-invalid" name="Usuario" placeholder="Email" required="" autofocus="" ng-model="lc.credentials.email" required/>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="Contraseña" placeholder="Contraseña" required="" ng-model="lc.credentials.password"/>
+                <input type="password" class="form-control ng-pristine ng-invalid" name="Contraseña" placeholder="Contraseña" required="" ng-model="lc.credentials.password" required/>
             </div>
             <hr class="colorgraph">
-            <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Conectarse" type="submit">Conectarse</button>
+            <button class="btn btn-lg btn-primary btn-block" ng-disabled="registerForm.$pristine || (registerForm.$dirty && registerForm.$invalid)" name="Submit" value="Conectarse" type="submit">Conectarse</button>
         </form>
     </div>
 </div>

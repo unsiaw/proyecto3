@@ -1,31 +1,56 @@
 <div ng-include="'views/partials/navbar.html'" ng-controller="navCtrl as nc"></div>
 <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <form role="form" class="form-signin" ng-submit="onSubmit(rc.credentials)" novalidate>
+        <form name="registerForm" role="form" class="form-signin ng-pristine" ng-submit="registerForm.name.$pristine onSubmit(rc.credentials)"
+            novalidate>
             <h3 class="form-signin-heading">Registro <small>Ingrese la información solicitada</small></h3>
             <hr class="colorgraph">
             <div class="form-group">
-                <input type="text" name="name" id="name" class="form-control input-lg" placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name">
+                <input type="text" name="name" id="name" ng-minlength="4" ng-maxlength="12" class="form-control input-lg ng-pristine ng-invalid"
+                    placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name" required>
+                <div class="custom-error" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">No válido:
+                    <span ng-show="registerForm.name.$error.required">Ingrese un Nombre.</span>
+                    <span ng-show="registerForm.name.$error.name">Por favor, ingrese un nombre válido.</span>
+                </div>
             </div>
             <div class="form-group">
-                <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="2"ng-model="rc.credentials.email">
+                <input type="email" name="email" id="email" class="form-control input-lg ng-pristine ng-invalid" placeholder="Email" tabindex="2"
+                    ng-model="rc.credentials.email" required>
+                <div class="custom-error" ng-show="registerForm.email.$dirty && registerForm.email.$invalid">No válido:
+                    <span ng-show="registerForm.email.$error.required">Ingrese un email.</span>
+                    <span ng-show="registerForm.email.$error.email">Por favor, ingrese un email válido.</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Contraseña" tabindex="3" ng-model="rc.credentials.password">
+                        <input type="password" ng-minlength="4" ng-maxlength="14" name="password" id="password" class="form-control input-lg ng-pristine ng-invalid"
+                            placeholder="Contraseña" tabindex="3" ng-model="rc.credentials.password" required>
+                        <div class="custom-error" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                            <span ng-show="registerForm.password.$error.required">Ingrese un password.</span>
+                            <span ng-show="registerForm.password.$error.password">Por favor, ingrese un password con más de 4 caracteres.</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Repetir contraseña" tabindex="4">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg ng-pristine ng-invalid"
+                            ng-model="rc.credentials.password_confirmation" ng-pattern="\b{{rc.credentials.password}}\b" placeholder="Repetir contraseña"
+                            tabindex="4" required>
+                        <!--<div ng-messages="registerForm.rc.credentials.password_confirmation.$error">
+                            <div ng-message="pattern">Not equal!!!</div>
+                        </div>-->
+                        <div class="custom-error" ng-show="registerForm.password_confirmation.$dirty && registerForm.password_confirmation.$invalid">
+                            <span ng-show="registerForm.password_confirmation.$error.required"> Confirme el password.</span>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr class="colorgraph">
             <div class="row">
-                <div class="col-xs-12 col-md-6"><input type="submit" value="Registrarse" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>
-                <div class="col-xs-12 col-md-6"><a href="/login" class="btn btn-success btn-block btn-lg">Ya tengo cuenta</a></div>
+                <div class="col-xs-12 col-md-6"><input type="submit" ng-disabled="registerForm.$pristine || (registerForm.$dirty && registerForm.$invalid)"
+                        value="Registrarse" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>
+                <div class="col-xs-12 col-md-6"><a href="/login" class="btn btn-success btn-block btn-lg" tabindex="6">Ya tengo cuenta</a></div>
             </div>
         </form>
     </div>
