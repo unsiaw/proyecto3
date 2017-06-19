@@ -39,8 +39,7 @@
                             <span ng-show="ongForm.mobilePhone.$error.required"> Se requiere un Número telefónico.</span>
                             <span class="error" ng-show="ongForm.mobilePhone.$error.minlength"> Muy corto!</span>
                             <span class="error" ng-show="ongForm.mobilePhone.$error.maxlength"> Muy largo!</span>
-
-
+                            <span class="error" ng-show="ongForm.mobilePhone.$error.pattern">Sólo puede ingresar Números</span>
                         </div>
                     </p>
                     <p>
