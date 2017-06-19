@@ -1,8 +1,8 @@
-<div ng-include="'views/partials/navbar.html'" ng-controller="navCtrl as nc"></div>
+<div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
 <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <form name="registerForm" role="form" class="form-signin ng-pristine" ng-submit="registerForm.name.$pristine onSubmit(rc.credentials)"
-            novalidate>
+        <flash-message name="register-alert"></flash-message>
+        <form role="form" class="form-signin" ng-submit="onSubmit(rc.credentials)" novalidate>
             <h3 class="form-signin-heading">Registro <small>Ingrese la información solicitada</small></h3>
             <hr class="colorgraph">
             <div class="form-group">

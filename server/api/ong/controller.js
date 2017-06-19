@@ -1,57 +1,57 @@
 var mongoose = require('mongoose');
-var User = require('./model');
+var Ong = require('./model');
+var utils = require('../../utils');
 
 // TODO: Sanitizar para evitar inyecciones!
 exports.list_all = function(req, res) {
-    User.find({},'-salt -hash',function(err, user) {
+    Ong.find({},function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
         }
-        res.json(user);
+        res.json(ong);
     });
 };
 
 exports.list_one = function(req, res) {
-    User.findById(req.params._id, '-salt -hash',function(err, user) {
+    Ong.findById(req.params._id,function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
         }
-        res.json(user);
+        res.json(ong);
     });
 };
 
-exports.create_user = function(req, res) {
-    var new_user = new User({name: req.body.name, email: req.body.email, admin: false});
-    new_user.setPassword(req.body.password);
-    new_user.save(function(err, user) {
+exports.create_ong = function(req, res) {
+    var new_ong = new Ong(req.body);
+    new_ong.save(function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
         }
-        res.json({id: user._id, name: user.name, email: user.email, admin: user.admin});
+        res.json({id: ong._id, nombre: ong.nombre});
     });
 };
 
-exports.update_user = function(req, res) {
-    User.findOneAndUpdate(req.params.id, req.body, {new: true}, function(err, user) {
+exports.update_ong = function(req, res) {
+    Ong.findOneAndUpdate(req.params.id, req.body, {new: true}, function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
         }
-        res.json(user);
+        res.json(ong);
     });
 };
 
-exports.delete_user = function(req, res) {
-    User.remove({
+exports.delete_ong = function(req, res) {
+    Ong.remove({
         _id: req.params.id
-    }, function(err, user) {
+    }, function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
         }
-        res.json({ message: 'User successfully deleted' });
+        res.json({ message: 'Ong successfully deleted' });
     });
 };

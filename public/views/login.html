@@ -1,7 +1,7 @@
-<div ng-include="'views/partials/navbar.html'" ng-controller="navCtrl as nc"></div>
+<div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
 <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <flash-message></flash-message>
+        <flash-message name="login-alert"></flash-message>
         <form name="Login_Form" class="form-signin" ng-submit="Login_Form.$valid && onSubmit(lc.credentials)" novalidate>
             <h3 class="form-signin-heading">Conectarse <small>Ingrese su usuario y contraseña.</small></h3>
             <hr class="colorgraph">

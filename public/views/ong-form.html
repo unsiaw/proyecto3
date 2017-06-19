@@ -1,0 +1,44 @@
+<div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Crear nueva ONG</h2>
+        </div>
+    </div>
+    <div>
+        <p>
+            <label>Nombre de la ONG (*)</label>
+            <input id="name" class="form-control" type="text" ng-model="ong.nombre" required>
+        </p>
+        <p>
+            <label>Tipo (*)</label>
+            <select id= tipo" class="form-control" name="singleSelect" ng-model="ong.tipo" ng-options="x for x in cat" required>
+            </select>
+        </p>
+        <p>
+            <label>Teléfono (Celular)</label>
+            <input id="mobilePhone" class="form-control" type="text" ng-model="ong.telefono">
+        </p>
+        <p>
+            <label>Responsable</label>
+            <input id="responsable" class="form-control" type="text" ng-model="ong.responsable">
+        </p>
+        <!-- Sección con mapa -->
+        <p>
+            <label>Ubicación (*)</label>
+            <input id="ubicacion" places-auto-complete types="['geocode']" on-place-changed="placeMarker()" class="form-control" type="text" ng-model="ong.ubicacion" required/>
+        </p>
+
+        <div class="form-control">
+            <ng-map id="mapa" center="{{center}}" zoom="12" style='width: 100%; margin: 15px'>
+                <marker position="{{latlng}}" animation="Animation.BOUNCE" animation="DROP" draggable="false"></marker>
+            </ng-map>
+        </div>
+            <input id="latitud" ng-model="ong.latitud" ng-hide="true">
+            <input id="longitud" ng-model="ong.longitud" ng-hide="true">
+        <p>
+            <button style="margin-top:20px" class="btn btn-default" ng-click="saveOng(ong)">Crear</button>
+            <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
+        </p>
+    </div>
+</div>
