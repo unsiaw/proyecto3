@@ -1,44 +1,90 @@
 <div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
-<div class="container">
+<fieldset class="container">
     <div class="row">
         <div class="col-md-6">
             <h2>Crear nueva ONG</h2>
         </div>
     </div>
-    <div>
-        <p>
-            <label>Nombre de la ONG (*)</label>
-            <input id="name" class="form-control" type="text" ng-model="ong.nombre" required>
-        </p>
-        <p>
-            <label>Tipo (*)</label>
-            <select id= "tipo" class="form-control" name="singleSelect" ng-model="ong.tipo" ng-options="x for x in cat" required>
+    <fieldset class="container">
+        <form name="ongForm" role="form" class="form-signin" ng-submit="saveOng(ong)" novalidate>
+            <div class="row">
+                <div class="col-md-5">
+                    <hr class="colorgraph">
+                    <p>
+                        <input id="name" name="name" ng-minlength="4" class="form-control ng-pristine ng-invalid" type="text" title="Nombre de la ONG (*)"
+                            placeholder="Nombre de la ONG (*)" data-placement="left" tooltip-enable="$isValid" tooltip="tooltip message"
+                            onmouseenter="$(this).tooltip('show')" ng-model="ong.nombre" tabindex="1" required>
+                        <div class="custom-error" ng-show="ongForm.name.$dirty && ongForm.name.$invalid">No válido:
+                            <span ng-show="ongForm.name.$error.required"> Se requiere un Nombre.</span>
+                            <span class="error" ng-show="ongForm.name.$error.minlength"> Muy corto!</span>
+                            <span class="error" ng-show="ongForm.name.$error.maxlength"> Muy largo!</span>
+                        </div>
+                    </p>
+                    <p>
+                        <select id="tipo" name="tipo" class="form-control ng-pristine ng-invalid" name="singleSelect" tabindex="2" data-placement="left"
+                            onmouseenter="$(this).tooltip('show')" title="Categoría (*)" ng-model="ong.tipo" ng-options="x for x in cat"
+                            required>
+                <option value="" disabled selected>Seleccionar Categoría (*)</option>
             </select>
-        </p>
-        <p>
-            <label>Teléfono (Celular)</label>
-            <input id="mobilePhone" class="form-control" type="text" ng-model="ong.telefono">
-        </p>
-        <p>
-            <label>Responsable</label>
-            <input id="responsable" class="form-control" type="text" ng-model="ong.responsable">
-        </p>
-        <!-- Sección con mapa -->
-        <p>
-            <label>Ubicación (*)</label>
-            <input id="ubicacion" places-auto-complete types="['geocode']" on-place-changed="placeMarker()" class="form-control" type="text" ng-model="ong.ubicacion" required/>
-        </p>
+                        <div class="custom-error" ng-show="ongForm.tipo.$dirty && ongForm.tipo.$invalid">No válido:
+                            <span ng-show="ongForm.tipo.$error.required">Seleccione una Categoría.</span>
+                            <span ng-show="ongForm.tipo.$error.invalid">Por favor, ingrese un nombre válido.</span>
+                        </div>
+                    </p>
+                    <p>
+                        <input id="mobilePhone" name="mobilePhone" ng-minlength="4" ng-maxlength="20" class="form-control ng-pristine ng-invalid"
+                            type="text" placeholder="Teléfono (Celular)" tabindex="3" data-placement="left" onmouseenter="$(this).tooltip('show')"
+                            title="Teléfono" ng-pattern="/^[0-9]+$/" ng-model="ong.telefono">
+                        <div class="custom-error" ng-show="ongForm.mobilePhone.$dirty && ongForm.mobilePhone.$invalid">No válido:
+                            <span ng-show="ongForm.mobilePhone.$error.required"> Se requiere un Número telefónico.</span>
+                            <span class="error" ng-show="ongForm.mobilePhone.$error.minlength"> Muy corto!</span>
+                            <span class="error" ng-show="ongForm.mobilePhone.$error.maxlength"> Muy largo!</span>
 
-        <div class="form-control">
-            <ng-map id="mapa" center="{{center}}" zoom="12" style='width: 100%; margin: 15px'>
-                <marker position="{{latlng}}" animation="Animation.BOUNCE" animation="DROP" draggable="false"></marker>
-            </ng-map>
-        </div>
-            <input id="latitud" ng-model="ong.latitud" ng-hide="true">
-            <input id="longitud" ng-model="ong.longitud" ng-hide="true">
-        <p>
-            <button style="margin-top:20px" class="btn btn-default" ng-click="saveOng(ong)">Crear</button>
-            <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
-        </p>
-    </div>
-</div>
+
+                        </div>
+                    </p>
+                    <p>
+                        <input id="responsable" name="responsable" class="form-control ng-pristine ng-invalid" type="text" placeholder="Responsable"
+                            title="Responsable" tabindex="4" data-placement="left" onmouseenter="$(this).tooltip('show')" ng-model="ong.responsable">
+                        <div class="custom-error" ng-show="ongForm.responsable.$dirty && ongForm.responsable.$invalid">No válido:
+                            <span ng-show="ongForm.responsable.$error.required">Ingrese un responsable.</span>
+                            <span ng-show="ongForm.responsable.$error.invalid">Por favor, ingrese un nombre más largo.</span>
+                        </div>
+
+                    </p>
+                    <!-- Sección con mapa -->
+                    <p>
+                        <input id="ubicacion" name="ubicacion" class="form-control ng-pristine ng-invalid" type="text" title="Ubicación" tabindex="5"
+                            places-auto-complete types="['geocode']" on-place-changed="placeMarker()" data-placement="left" onmouseenter="$(this).tooltip('show')"
+                            ng-model="ong.ubicacion" required/>
+                        <div class="custom-error" ng-show="ongForm.ubicacion.$dirty && ongForm.ubicacion.$invalid">No válido:
+                            <span ng-show="ongForm.ubicacion.$error.required">Ingrese una ubicacion.</span>
+                            <span ng-show="ongForm.ubicacion.$error.ubicacion">Por favor, ingrese un nombre más largo.</span>
+                        </div>
+                    </p>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-3">
+                                <p>
+                                    <button type="submit" data-placement="left" onmouseenter="$(this).tooltip('show')" style="margin-top:20px" tabindex="6" title="Crear"
+                                        class="btn btn-lg btn-success" ng-click="saveOng(ong)" ng-disabled="ongForm.$pristine || (ongForm.$dirty && ongForm.$invalid)"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Crear</button>
+                                    <button data-placement="right" onmouseenter="$(this).tooltip('show')" style="margin-top:20px" title="Volver" tabindex="7"
+                                        class="btn btn-lg btn-info" ng-click="back()">Volver <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <fieldset>
+                        <ng-map id="mapa" center="{{center}}" zoom="12" style='width: 600px; display: block; height: 370px;'>
+                            <marker position="{{latlng}}" animation="Animation.BOUNCE" animation="DROP" draggable="false"></marker>
+                        </ng-map>
+                    </fieldset>
+                    <input id="latitud" ng-model="ong.latitud" ng-hide="true">
+                    <input id="longitud" ng-model="ong.longitud" ng-hide="true">
+                </div>
+            </div>
+    </fieldset>
+</fieldset>

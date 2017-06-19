@@ -2,7 +2,7 @@
 <div class="container">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
         <flash-message name="register-alert"></flash-message>
-        <form role="form" class="form-signin" ng-submit="onSubmit(rc.credentials)" novalidate>
+        <form name="registerForm" role="form" class="form-signin" ng-submit="onSubmit(rc.credentials)" novalidate>
             <h3 class="form-signin-heading">Registro <small>Ingrese la información solicitada</small></h3>
             <hr class="colorgraph">
             <div class="form-group">
@@ -10,7 +10,8 @@
                     placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name" required>
                 <div class="custom-error" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">No válido:
                     <span ng-show="registerForm.name.$error.required">Ingrese un Nombre.</span>
-                    <span ng-show="registerForm.name.$error.name">Por favor, ingrese un nombre válido.</span>
+                            <span class="error" ng-show="registerForm.name.$error.minlength">Muy corto!</span>
+                            <span class="error" ng-show="registerForm.name.$error.maxlength">Muy largo!</span>
                 </div>
             </div>
             <div class="form-group">
@@ -28,7 +29,8 @@
                             placeholder="Contraseña" tabindex="3" ng-model="rc.credentials.password" required>
                         <div class="custom-error" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
                             <span ng-show="registerForm.password.$error.required">Ingrese un password.</span>
-                            <span ng-show="registerForm.password.$error.password">Por favor, ingrese un password con más de 4 caracteres.</span>
+                            <span class="error" ng-show="registerForm.password.$error.minlength">Muy corto!</span>
+                            <span class="error" ng-show="registerForm.password.$error.maxlength">Muy largo!</span>
                         </div>
                     </div>
                 </div>

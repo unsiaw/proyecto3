@@ -21,7 +21,13 @@
     height: auto;
     padding: 10px;
 }
-
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 90px;
+  text-indent: 0.01px;
+  text-overflow: "";
+}
 input[type="text"] {
     margin-bottom: 0px;
     border-bottom-left-radius: 0;
@@ -53,14 +59,21 @@ input[type="password"] {
     border-color: #78FA89;
 }
 
-.btn-circle.btn-lg {
-    width: 50px;
-    height: 50px;
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 25px;
-}
 .ng-pristine {
     border-color: #669ae1;
+}
+
+.btn-circle.btn {
+  width: 49px;
+  height: 49px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+}
+.btn-success.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #3e8f3e;
+  -moz-box-shadow:    0px 0px 3px 1px #3e8f3e;
+  box-shadow:         0px 0px 3px 1px #3e8f3e;
 }
