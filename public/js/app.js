@@ -16,7 +16,6 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
             .when('/map', {
                 templateUrl: 'views/map.html',
                 controller: 'MapController',
-                requiresLogin: true
             })
             .when('/about', {
                 templateUrl: 'views/about.html'
@@ -41,7 +40,8 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
             })
             .when("/add/ong", {
                 controller: "NewOngController",
-                templateUrl: "views/ong-form.html"
+                templateUrl: "views/ong-form.html",
+                requiresLogin: true
             })
             .when("/ong/:ongId", {
                 controller: "EditOngController",

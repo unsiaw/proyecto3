@@ -5,31 +5,38 @@
         <a type="button" href="/add/ong" class="btn btn-success btn-circle btn-lg"><i class="glyphicon glyphicon-plus"></i></a>
     </div>
     <div ng-hide="ongs.length === 0">
-        <div class="panel-custom">
-            <input type="text" ng-model="buscador" />
+        <div class="row col-xs-12 col-sm-6 col-md-4">
+            <form role="form">
+                <div class="form-group has-feedback has-feedback-left">
+                    <input type="text" class="form-control" placeholder="Buscar" ng-model="buscador"/>
+                    <i class="form-control-feedback glyphicon glyphicon-search"></i>
+                </div>
+            </form>
         </div>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Nombre </th>
-                <th>Tipo</th>
-                <th>Ubicación</th>
-                <th>Responsable</th>
-                <th ng-if="currentUser.admin">Opciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="(id,ong) in ongs | filter: buscador">
-                <td>{{ ong.nombre}}</td>
-                <td>{{ ong.tipo}}</td>
-                <td>{{ ong.ubicacion}}</td>
-                <td>{{ ong.responsable}}</td>
-                <td ng-if="currentUser.admin">
-                    <a class="btn btn-info" href="/edit/{{id}}" class="button expand alert"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                    <button ng-click="deleteOng(ong._id)" class="btn btn-danger" class="button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nombre </th>
+                    <th>Tipo</th>
+                    <th>Ubicación</th>
+                    <th>Responsable</th>
+                    <th ng-if="currentUser.admin">Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(id,ong) in ongs | filter: buscador">
+                    <td>{{ ong.nombre}}</td>
+                    <td>{{ ong.tipo}}</td>
+                    <td>{{ ong.ubicacion}}</td>
+                    <td>{{ ong.responsable}}</td>
+                    <td ng-if="currentUser.admin">
+                        <a class="btn btn-info" href="/edit/{{id}}" class="button expand alert"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <button ng-click="deleteOng(ong._id)" class="btn btn-danger" class="button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
