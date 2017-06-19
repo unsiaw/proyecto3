@@ -1,7 +1,28 @@
-<div ng-include="'views/partials/navbar.html'" ng-controller="navCtrl as nc"></div>
-<div class="container">
+<div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
+<div class="container" ng-controller="MyCtrl">
+
     <div class="row">
-        <div class="col-md-9">Mapa</div>
-        <div class="col-md-3">Filtros</div>
+        <div class="col-md-9">
+            <ng-map zoom="12" center="{{[-38.7018411,-62.2724209]}}" scrollwheel="false" zoom-to-include-markers="true">
+                <marker ng-repeat="c in selectedOngs" position="{{c.pos}}" title="{{c.name}}"></marker>
+            </ng-map>
+        </div>
+        <div class="col-md-3">
+            <h2>Seleccione ongs:</h2>
+            <select multiple size="3" ng-model="selectedValues" ng-change="selectionsChanged()">
+                <option ng:repeat="c in ongs" selected value="{{c.id}}">{{c.name}}</option>
+            </select>
+
+            <div class="row">
+                <div class="large-4 columns">
+                    <div class="input-field">
+                        <select name="singleSelect" ng-model="ong.cat" ng-options="x for x in cat" ng-change="filterMarkers()">
+                            <option value="" selected>Seleccionar Categoría</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--tt> selectedValues = {{selectedOngs}}</tt-->
     </div>
 </div>

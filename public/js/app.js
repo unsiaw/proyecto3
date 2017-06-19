@@ -5,17 +5,17 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
         $routeProvider
             .when('/login', {
                 templateUrl: 'views/login.html',
-                controller: 'loginCtrl',
+                controller: 'LoginController',
                 as: 'lc'
             })
             .when('/register', {
                 templateUrl: 'views/register.html',
-                controller: 'registerCtrl',
+                controller: 'RegisterController',
                 as: 'rc'
             })
             .when('/map', {
                 templateUrl: 'views/map.html',
-                controller: 'mapCtrl',
+                controller: 'MapController',
                 requiresLogin: true
             })
             .when('/about', {
@@ -29,6 +29,23 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
             })
             .when('/', {
                 templateUrl: 'views/index.html'
+            })
+            .when("/ongs", {
+                templateUrl: "views/list-ong.html",
+                controller: "ListOngController",
+                resolve: {
+                    ongs: function(OngService) {
+                        return OngService.getOngs();
+                    }
+                }
+            })
+            .when("/add/ong", {
+                controller: "NewOngController",
+                templateUrl: "views/ong-form.html"
+            })
+            .when("/ong/:ongId", {
+                controller: "EditOngController",
+                templateUrl: "views/ong.html"
             })
             .otherwise({
                 redirectTo: '/'
