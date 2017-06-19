@@ -102,7 +102,7 @@ mainApp.controller('LoginController', ['$scope', '$location', 'Flash', 'AuthServ
                 $location.path('/map');
             })
             .catch(function (err) {
-                Flash.create('danger', err.data.message, 10000, { id: 'login-alert'}, true);
+                Flash.create('danger', err.data.message, 10000, { container: 'login-alert'}, true);
             });
     };
 }]);
@@ -121,7 +121,7 @@ mainApp.controller('RegisterController', ['$scope', '$location', 'Flash', 'AuthS
                 $location.path('/map');
             })
             .catch(function (err) {
-                Flash.create('danger', err.data.message, 10000, { id: 'register-alert'}, true);
+                Flash.create('danger', err.data.message, 10000, { container: 'register-alert'}, true);
             });
     };
 }]);
@@ -151,19 +151,40 @@ mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'o
     };
 }]);
 
-mainApp.controller("NewOngController", ['$scope', '$location', 'OngService', function($scope, $location, OngService) {
+mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location', 'OngService', function($scope, $http, $locale, $location, OngService) {
+    $scope.cat = ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
+
     $scope.back = function() {
         $location.path("/");
     };
 
-    $scope.saveContact = function(ong) {
+    $scope.saveOng = function(ong) {
         OngService.createOng(ong).then(function(doc) {
-            var ongUrl = "/ong/" + doc.data._id;
-            $location.path(ongUrl);
-        }, function(response) {
+            //var ongUrl = "/ong/" + doc.data._id;
+            $location.path('/ongs');
+        }).catch(function(response) {
+            console.log(response);
             alert(response);
         });
-    }
+    };
+
+    $scope.center = [-38.7018411,-62.2724209];
+    $scope.latlng = [-38.7018411,-62.2724209];
+
+    $scope.getpos = function (event) {
+        $scope.lat = event.latLng.lat();
+        $scope.lng = event.latLng.lng();
+        $scope.latlng = [event.latLng.lat(), event.latLng.lng()];
+    };
+
+    $scope.placeMarker = function(){
+        var place = this.getPlace();
+        var loc = place.geometry.location;
+        $scope.latitud = loc.lat();
+        $scope.longitud = loc.lng();
+        $scope.latlng = [loc.lat(), loc.lng()];
+        $scope.center = [loc.lat(), loc.lng()];
+    };
 }]);
 
 mainApp.controller("EditOngController", ['$scope', '$routeParams', 'OngService', function($scope, $routeParams, OngService) {

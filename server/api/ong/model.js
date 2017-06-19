@@ -8,7 +8,7 @@ var ongSchema = new mongoose.Schema({
     },
     tipo: {
         type: String,
-        enum : ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Otros'],
+        enum : ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'],
         default: 'Otros'
     },
     ubicacion: {

@@ -3,23 +3,19 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var config = require('../../config');
 var User = mongoose.model('User');
-
-var sendJSONresponse = function(res, status, content) {
-    res.status(status);
-    res.json(content);
-};
+var utils = require('../utils');
 
 module.exports.me_from_token = function (req, res) {
 
     let token = req.body.token;
     if(!req.body.token) {
-        sendJSONresponse(res, 400, { message: "No se recibió token" });
+        utils.sendJSONresponse(res, 400, { message: "No se recibió token" });
         return;
     }
 
     jwt.verify(token, config.session.secret_key, function(err, user) {
         if (err) {
-            sendJSONresponse(res, 400, { message: "Token expirado" });
+            utils.sendJSONresponse(res, 400, { message: "Token expirado" });
             return;
         }
 
@@ -37,7 +33,7 @@ module.exports.me_from_token = function (req, res) {
 module.exports.register = function(req, res) {
 
     if(!req.body.name || !req.body.email || !req.body.password) {
-        sendJSONresponse(res, 400, {
+        utils.sendJSONresponse(res, 400, {
             message: "Faltan completar campos"
         });
         return;
@@ -63,9 +59,8 @@ module.exports.register = function(req, res) {
 
 module.exports.login = function(req, res) {
 
-
     if(!req.body.email || !req.body.password) {
-        sendJSONresponse(res, 400, {
+        utils.sendJSONresponse(res, 400, {
             message: "Faltan completar campos"
         });
         return;
