@@ -69,11 +69,65 @@ input[type="password"] {
   text-align: center;
   padding: 5px 0;
   font-size: 20px;
-  line-height: 2.00;
+  line-height: 1.70;
   border-radius: 30px;
 }
 .btn-success.btn-circle{
   -webkit-box-shadow: 0px 0px 3px 1px #3e8f3e;
   -moz-box-shadow:    0px 0px 3px 1px #3e8f3e;
   box-shadow:         0px 0px 3px 1px #3e8f3e;
+}
+.btn-circle, .btn-circle-3d{
+  border-radius: 50% !important;
+}
+
+.btn-primary.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #245580;
+  -moz-box-shadow:    0px 0px 3px 1px #245580;
+  box-shadow:         0px 0px 3px 1px #245580;
+}
+
+.btn-default.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #ccc;
+  -moz-box-shadow:    0px 0px 3px 1px #ccc;
+  box-shadow:         0px 0px 3px 1px #ccc;
+}
+.btn-danger.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #b92c28;
+  -moz-box-shadow:    0px 0px 3px 1px #b92c28;
+  box-shadow:         0px 0px 3px 1px #b92c28;
+}
+.btn-warning.btn-circle{
+  -webkit-box-shadow: 0px 0px 3px 1px #e38d13;
+  -moz-box-shadow:    0px 0px 3px 1px #e38d13;
+   box-shadow:         0px 0px 3px 1px #e38d13;
+}
+.fa-gmail{
+    background-image: url(https://cloud.githubusercontent.com/assets/7534680/4515518/6739a508-4bc1-11e4-80bc-670bcc216762.png);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal {
+        display: none;
+        text-align: center;
+        position: fixed;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        border: 100%;
+        padding: 16px;
+        font-size: 14px;
+        overflow: auto;
+}
+
+.modal,
+.notice {
+  display: none;
+}
+.modal-title{
+  width: 100%;
+  background: #ec4b4b;
+  padding: 15px 15px;
 }

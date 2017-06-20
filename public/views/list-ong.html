@@ -9,7 +9,6 @@
             </div>
         </div>
     </fieldset>
-
     <fieldset ng-hide="ongs.length === 0">
         <div class="row">
             <div class="col-sm-4">
@@ -52,19 +51,23 @@
                 </tr>
                 </tbody>
             </table>
-            <div id="delete-modal" class="modal">
-                <div class="modal-content animate">
-                    <div class="modal-container">
-                        <div class="pokemon-details">
-                            <h1>Confirma que quiere eliminar la siguiente ONG?</h1>
-                            <div id="pokemon-data-text">
+            <div id="delete-modal" class="modal fade bs-example-modal-sm" tabindex="-5" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-content">
+                  <div class="modal-container">
+                        <div class="ong-details">
+                            <h4 class="modal-title" id="myModalLabel">Confirma que quiere eliminar la siguiente ONG?</h4>
+
+                            <div class="row" id="ong-data-text">
+                                <p></p>
                                 <p>Nombre: {{selected_ong.nombre}}</p>
                                 <p>Tipo: {{selected_ong.tipo}}</p>
                             </div>
                         </div>
                         <div class="options">
-                            <button class="options-link" ng-click="deleteOng(selected_ong._id)" data-dismiss="modal">Confirmar</button>
-                            <button class="options-link" data-dismiss="modal">Cancelar</button>
+                            <button onmouseenter="$(this).tooltip('show')" data-placement="left" type="button"  data-toggle="modal" ng-click="deleteOng(selected_ong._id)" data-dismiss="modal" title="Eliminar"
+                                class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <b> Eliminar</b></button>
+                            <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button"  data-toggle="modal" data-dismiss="modal" title="Eliminar"
+                                class="btn btn-warning button expand alert"><b>Cancelar </b> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
@@ -72,3 +75,6 @@
         </div>
     </fieldset>
 </div>
+
+
+                    
