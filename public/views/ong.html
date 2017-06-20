@@ -1,8 +1,10 @@
 <div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
+
 <fieldset class="container">
     <div class="row">
         <div class="col-md-6">
             <h2>Crear nueva ONG</h2>
+                {{ong}}
         </div>
     </div>
     <fieldset class="container">
@@ -11,7 +13,7 @@
                 <div class="col-md-5">
                     <hr class="colorgraph">
                     <p>
-                        <input id="name" name="name" ng-minlength="4" class="form-control ng-pristine ng-invalid" type="text" title="Nombre de la ONG (*)"
+                        <input id="name" name="name" value="{{ong.nombre}}" ng-minlength="4" class="form-control ng-pristine ng-invalid" type="text" title="Nombre de la ONG (*)"
                             placeholder="Nombre de la ONG (*)" data-placement="left" tooltip-enable="$isValid" tooltip="tooltip message"
                             onmouseenter="$(this).tooltip('show')" ng-model="ong.nombre" 6 required>
                         <div class="custom-error" ng-show="ongForm.name.$dirty && ongForm.name.$invalid">No válido:

@@ -190,6 +190,7 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
 mainApp.controller("EditOngController", ['$scope', '$routeParams', 'OngService', function($scope, $routeParams, OngService) {
     OngService.getOneOng($routeParams.ongId).then(function(doc) {
         $scope.ong = doc.data;
+        console.log("hola mundo");
     }, function(response) {
         alert(response);
     });

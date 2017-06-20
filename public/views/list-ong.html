@@ -45,7 +45,7 @@
                         <td>{{ ong.ubicacion}}</td>
                         <td>{{ ong.responsable}}</td>
                         <td ng-if="currentUser.admin">
-                            <a onmouseenter="$(this).tooltip('show')" data-placement="left" class="btn btn-info button expand alert" title="Editar" href="/edit/{{id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                            <a onmouseenter="$(this).tooltip('show')" data-placement="left" class="btn btn-info button expand alert" title="Editar" href="/ong/{{ong._id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
                             <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button" ng-click="deleteOng(ong._id)" title="Eliminar"
                                 class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
                         </td>
