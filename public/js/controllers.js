@@ -141,7 +141,6 @@ mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'o
 
     $scope.sortType = 'name'; // set the default sort type
     $scope.sortReverse = false;  // set the default sort order
-    $scope.searchOng = '';     // set the default search/filter term
 
     $scope.openModal = function (obj) {
         $scope.selected_ong = obj;

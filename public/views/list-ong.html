@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                            <input type="text" class="form-control" placeholder="Buscar una ONG" ng-model="searchOng">
+                            <input type="text" class="form-control" placeholder="Buscar una ONG" ng-model="buscador">
                         </div>
                     </div>
                 </form>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="row">
-            <table class="table table-bordered table-striped table-hover">
+            <table class="table table-striped table-hover">
                 <thead>
                     <tr class="success">
                         <td href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
@@ -63,7 +63,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="info" ng-repeat="(id,ong) in ongs | orderBy:sortType:sortReverse  | filter: buscador | filter:searchOng">
+                    <tr ng-repeat="(id,ong) in ongs | orderBy:sortType:sortReverse  | filter: buscador">
                         <td>{{ ong.nombre}}</td>
                         <td>{{ ong.tipo}}</td>
                         <td>{{ ong.ubicacion}}</td>
