@@ -166,16 +166,13 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
     $scope.cat = ['Niños y adolescentes', 'Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
 
     $scope.back = function () {
-        //$location.path("/");
         window.history.back();
     };
 
     $scope.saveOng = function (ong) {
         OngService.createOng(ong).then(function (doc) {
-            //var ongUrl = "/ong/" + doc.data._id;
             $location.path('/ongs');
         }).catch(function (response) {
-            console.log(response);
             alert(response);
         });
     };
@@ -207,7 +204,6 @@ mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 
         $scope.ong = doc.data;
         $scope.center = [$scope.ong.latitud, $scope.ong.longitud];
         $scope.latlng = [$scope.ong.latitud, $scope.ong.longitud];
-        console.log(doc);
     }, function (response) {
         alert(response);
     });
@@ -218,7 +214,6 @@ mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 
 
     $scope.saveOng = function (ong) {
         OngService.editOng(ong).then(function (doc) {
-            //var ongUrl = "/ong/" + doc.data._id;
             $location.path('/ongs');
         }).catch(function (response) {
             console.log(response);
