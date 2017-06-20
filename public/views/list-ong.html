@@ -15,7 +15,7 @@
             <div class="col-sm-4">
                 <div class="panel-custom" ng-if="currentUser.admin">
                     <a type="button" data-toggle="tooltip" data-placement="right" onmouseenter="$(this).tooltip('show')" title="Agregar ONG"
-                        href="/add/ong" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></a>
+                       href="/add/ong" class="btn btn-success btn-circle"><i class="glyphicon glyphicon-plus"></i></a>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4">
@@ -30,28 +30,45 @@
         <div class="row">
             <table class="table table-hover">
                 <thead>
-                    <tr class="success">
-                        <th>Nombre </th>
-                        <th>Tipo</th>
-                        <th>Ubicación</th>
-                        <th>Responsable</th>
-                        <th ng-if="currentUser.admin">Opciones</th>
-                    </tr>
+                <tr class="success">
+                    <th>Nombre </th>
+                    <th>Tipo</th>
+                    <th>Ubicación</th>
+                    <th>Responsable</th>
+                    <th ng-if="currentUser.admin">Opciones</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr class="info" ng-repeat="(id,ong) in ongs | filter: buscador">
-                        <td>{{ ong.nombre}}</td>
-                        <td>{{ ong.tipo}}</td>
-                        <td>{{ ong.ubicacion}}</td>
-                        <td>{{ ong.responsable}}</td>
-                        <td ng-if="currentUser.admin">
-                            <a onmouseenter="$(this).tooltip('show')" data-placement="left" class="btn btn-info button expand alert" title="Editar" href="/ong/{{ong._id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                            <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button" ng-click="deleteOng(ong._id)" title="Eliminar"
+                <tr class="info" ng-repeat="(id,ong) in ongs | filter: buscador">
+                    <td>{{ ong.nombre}}</td>
+                    <td>{{ ong.tipo}}</td>
+                    <td>{{ ong.ubicacion}}</td>
+                    <td>{{ ong.responsable}}</td>
+                    <td ng-if="currentUser.admin">
+                        <a onmouseenter="$(this).tooltip('show')" data-placement="left" class="btn btn-info button expand alert" title="Editar" href="/ong/{{ong._id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                        <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button"  data-toggle="modal" data-target="#delete-modal" ng-click="openModal(ong)" title="Eliminar"
                                 class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 </tbody>
             </table>
+            <div id="delete-modal" class="modal">
+                <div class="modal-content animate">
+                    <div class="modal-container">
+                        <div class="pokemon-details">
+                            <h1>Confirma que quiere eliminar la siguiente ONG?</h1>
+                            <div id="pokemon-data-text">
+                                <p>Nombre: {{selected_ong.nombre}}</p>
+                                <p>Tipo: {{selected_ong.tipo}}</p>
+                            </div>
+                        </div>
+                        <div class="options">
+                            <button class="options-link" ng-click="deleteOng(selected_ong._id)" data-dismiss="modal">Confirmar</button>
+                            <button class="options-link" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </fieldset>
 </div>
