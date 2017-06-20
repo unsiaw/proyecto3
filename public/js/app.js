@@ -1,4 +1,4 @@
-var mainApp = angular.module('maps', ['ngRoute', 'ngMap', 'ngFlash', 'angular-jwt']);
+var mainApp = angular.module('maps', ['ngRoute', 'ngMap', 'ngFlash', 'angular-jwt', 'ngTagsInput']);
 
 mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
     function($routeProvider, $locationProvider, jwtOptionsProvider) {
@@ -16,6 +16,11 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
             .when('/map', {
                 templateUrl: 'views/map.html',
                 controller: 'MapController',
+                resolve: {
+                    ongs: function(OngService) {
+                        return OngService.getOngs();
+                    }
+                }
             })
             .when('/about', {
                 templateUrl: 'views/about.html'
