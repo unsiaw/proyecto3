@@ -180,8 +180,8 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
     $scope.placeMarker = function(){
         var place = this.getPlace();
         var loc = place.geometry.location;
-        $scope.latitud = loc.lat();
-        $scope.longitud = loc.lng();
+        $scope.ong.latitud = loc.lat();
+        $scope.ong.longitud = loc.lng();
         $scope.latlng = [loc.lat(), loc.lng()];
         $scope.center = [loc.lat(), loc.lng()];
     };
@@ -190,7 +190,7 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
 mainApp.controller("EditOngController", ['$scope', '$routeParams', 'OngService', function($scope, $routeParams, OngService) {
     OngService.getOneOng($routeParams.ongId).then(function(doc) {
         $scope.ong = doc.data;
-        console.log("hola mundo");
+        console.log(doc);
     }, function(response) {
         alert(response);
     });

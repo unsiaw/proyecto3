@@ -61,7 +61,8 @@
                             <span ng-show="ongForm.ubicacion.$error.ubicacion">Por favor, ingrese un nombre más largo.</span>
                         </div>
                     </p>
-
+                    <input name="latitud" id="latitud" ng-value="ong.latitud" ng-model="ong.latitud" type="hidden"/>
+                    <input name="longitud" id="longitud" ng-value="ong.longitud" ng-model="ong.longitud" type="hidden"/>
                     <div class="container">
                         <div class="row">
                             <div class="col-md-offset-1 col-md-3">
@@ -81,9 +82,9 @@
                             <marker position="{{latlng}}" animation="Animation.BOUNCE" animation="DROP" draggable="false"></marker>
                         </ng-map>
                     </fieldset>
-                    <input id="latitud" ng-model="ong.latitud" ng-hide="true">
-                    <input id="longitud" ng-model="ong.longitud" ng-hide="true">
+
                 </div>
             </div>
+        </form>
     </fieldset>
 </fieldset>

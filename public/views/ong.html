@@ -53,8 +53,9 @@
                         </div>
 
                     </p>
-                    <!-- Sección con mapa -->
-                    <p>
+                    <input name="latitud" id="latitud" ng-value="ong.latitud" ng-model="ong.latitud" type="hidden"/>
+                    <input name="longitud" id="longitud" ng-value="ong.longitud" ng-model="ong.longitud" type="hidden"/>
+                   <p>
                         <input id="ubicacion" name="ubicacion" class="form-control ng-pristine ng-invalid" type="text" title="Ubicación" 6
                             places-auto-complete types="['geocode']" on-place-changed="placeMarker()" data-placement="left" onmouseenter="$(this).tooltip('show')"
                             ng-model="ong.ubicacion" required/>
@@ -83,9 +84,9 @@
                             <marker position="{{latlng}}" animation="Animation.BOUNCE" animation="DROP" draggable="false"></marker>
                         </ng-map>
                     </fieldset>
-                    <input id="latitud" ng-model="ong.latitud" ng-hide="true">
-                    <input id="longitud" ng-model="ong.longitud" ng-hide="true">
+
                 </div>
             </div>
+        </form>
     </fieldset>
 </fieldset>
