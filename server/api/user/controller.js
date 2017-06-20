@@ -13,7 +13,7 @@ exports.list_all = function(req, res) {
 };
 
 exports.list_one = function(req, res) {
-    User.findById(req.params._id, '-salt -hash',function(err, user) {
+    User.findById(req.params.id, '-salt -hash',function(err, user) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
