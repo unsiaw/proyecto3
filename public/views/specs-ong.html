@@ -1,0 +1,59 @@
+<div ng-include="'views/partials/navbar.html'" ng-controller="NavigationController as nc"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!--DESCRIPCION de la ONG-->
+            <div>
+                <h2>ONG</h2><hr class="colorgraph">
+                <dl class="list-unstyled">
+                    <dt><h4><strong>Nombre:</strong></h4></dt>
+                    <dd class="tab">{{ong.nombre}}</dd>
+                    <dt><h4><strong>Tipo:</strong></h4></dt>
+                    <dd class="tab">{{ong.tipo}}</dd>
+                    <dt><h4><strong>Ubicación:</strong></h4></dt>
+                    <dd class="tab">{{ong.ubicacion}}</dd>
+                    <dt><h4><strong>Responsable:</strong></h4></dt>
+                    <dd class="tab">{{ong.responsable}}</dd>
+                </dl>
+                </ul>
+            </div>
+            <hr class="colorgraph">
+        </div>
+        <div class="col-md-6">
+            <div>
+                <!--  Ong comentarios List -->
+                <ul>
+                    <h3> Comentarios </h3>
+                    <li ng-repeat="comentario in product.comentarios">
+
+                        <blockquote>
+                            {{comentario.body}}
+                            <cite class="clearfix">—{{comentario.autor}}  on {{comentario.createdOn | date}}</cite>
+                        </blockquote>
+                    </li>
+                </ul>
+                <!--  comentario Form -->
+                <form name="comentarioForm" role="form" ng-controller="comentarioController as comentarios" ng-submit="comentarios.addcomentario(product)">
+                    <!--  Live comentario -->
+                    <blockquote ng-show="comentarios.comentario.stars">
+                        {{comentarios.comentario.body}}
+                        <cite class="clearfix">—{{comentarios.comentario.autor}}</cite>
+                    </blockquote>
+                    <!--  comentario Form -->
+                    <h4>Enviar un comentario</h4>
+                    <fieldset class="form-group">
+                        <textarea ng-model="comentarios.comentario.body" class="form-control" placeholder="Escribir un pequeño comentario sobre la ONG..."
+                            title="comentario"></textarea>
+                    </fieldset>
+                    <!--<fieldset class="form-group">
+                        <input ng-model="comentarios.comentario.autor" type="email" class="form-control" placeholder="jimmyDean@sausage.com" title="Email"
+                        />
+                    </fieldset>-->
+                    <fieldset class="form-group">
+                        <input type="submit" class="btn btn-primary pull-right" value="Enviar comentario" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

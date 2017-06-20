@@ -52,6 +52,10 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
                 controller: "EditOngController",
                 templateUrl: "views/ong.html"
             })
+            .when("/specs/ong/:ongId", {
+                controller: "SpecsOngController",
+                templateUrl: "views/specs-ong.html"
+            })
             .otherwise({
                 redirectTo: '/'
             });
