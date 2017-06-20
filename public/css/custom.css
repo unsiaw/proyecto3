@@ -82,9 +82,10 @@ input[type="password"] {
 }
 
 .btn-primary.btn-circle{
-  -webkit-box-shadow: 0px 0px 3px 1px #245580;
-  -moz-box-shadow:    0px 0px 3px 1px #245580;
-  box-shadow:         0px 0px 3px 1px #245580;
+  -webkit-box-shadow: 0px 0px 3px 1px #3b5998;
+  -moz-box-shadow:    0px 0px 3px 1px #3b5998;
+  box-shadow:         0px 0px 3px 1px #3b5998;
+  background-color: #3b5998;
 }
 
 .btn-default.btn-circle{
@@ -101,6 +102,10 @@ input[type="password"] {
   -webkit-box-shadow: 0px 0px 3px 1px #e38d13;
   -moz-box-shadow:    0px 0px 3px 1px #e38d13;
    box-shadow:         0px 0px 3px 1px #e38d13;
+}
+btn-danger {
+
+    background-color: tomato;
 }
 .fa-gmail{
     background-image: url(https://cloud.githubusercontent.com/assets/7534680/4515518/6739a508-4bc1-11e4-80bc-670bcc216762.png);
