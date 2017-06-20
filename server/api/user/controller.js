@@ -35,7 +35,7 @@ exports.create_user = function(req, res) {
 };
 
 exports.update_user = function(req, res) {
-    User.findOneAndUpdate(req.params.id, req.body, {new: true}, function(err, user) {
+    User.findByIdAndUpdate(req.body._id, req.body, {new: true}, function(err, user) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;

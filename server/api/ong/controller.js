@@ -35,7 +35,7 @@ exports.create_ong = function(req, res) {
 };
 
 exports.update_ong = function(req, res) {
-    Ong.findOneAndUpdate(req.params.id, req.body, {new: true}, function(err, ong) {
+    Ong.findByIdAndUpdate(req.body._id, req.body, {new: true}, function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
