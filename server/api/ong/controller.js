@@ -14,7 +14,6 @@ exports.list_all = function(req, res) {
 };
 
 exports.list_one = function(req, res) {
-    // console.log(req)
     Ong.findById(req.params.id,function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
@@ -25,7 +24,6 @@ exports.list_one = function(req, res) {
 };
 
 exports.create_ong = function(req, res) {
-     console.log(req)
     var new_ong = new Ong(req.body);
     new_ong.save(function(err, ong) {
         if (err) {

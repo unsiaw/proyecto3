@@ -162,7 +162,8 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
     $scope.cat = ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
 
     $scope.back = function() {
-        $location.path("/");
+        //$location.path("/");
+        window.history.back();
     };
 
     $scope.saveOng = function(ong) {
@@ -194,7 +195,7 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
     };
 }]);
 
-mainApp.controller("EditOngController", ['$scope', '$routeParams', 'OngService', function($scope, $routeParams, OngService) {
+mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 'OngService', function($scope,  $location, $routeParams, OngService) {
     OngService.getOneOng($routeParams.ongId).then(function(doc) {
         $scope.ong = doc.data;
         console.log(doc);
@@ -202,23 +203,18 @@ mainApp.controller("EditOngController", ['$scope', '$routeParams', 'OngService',
         alert(response);
     });
 
-    $scope.toggleEdit = function() {
-        $scope.editMode = true;
-        $scope.contactFormUrl = "ong-form.html";
-    };
-
     $scope.back = function() {
-        $scope.editMode = false;
-        $scope.contactFormUrl = "";
+        //$location.path("/");
+        window.history.back();
     };
 
     $scope.saveOng = function(ong) {
-        OngService.editOng(ong);
-        $scope.editMode = false;
-        $scope.contactFormUrl = "";
+        OngService.editOng(ong).then(function(doc) {
+            //var ongUrl = "/ong/" + doc.data._id;
+            $location.path('/ongs');
+        }).catch(function(response) {
+            console.log(response);
+            alert(response);
+        });
     };
-
-    $scope.deleteOng = function(ongId) {
-        OngService.deleteOng(ongId);
-    }
 }]);

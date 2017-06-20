@@ -43,7 +43,7 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
                 templateUrl: "views/ong-form.html",
                 requiresLogin: true
             })
-            .when("/ong/:ongId", {
+            .when("/edit/ong/:ongId", {
                 controller: "EditOngController",
                 templateUrl: "views/ong.html"
             })
