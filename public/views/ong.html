@@ -22,11 +22,10 @@
                         </div>
                     </p>
                     <p>
-                        <select id="tipo" name="tipo" class="form-control ng-pristine ng-invalid" name="singleSelect" 6 data-placement="left"
+                        <select id="tipo" name="tipo" ng-selected="ong.tipo" class="form-control ng-pristine ng-invalid" name="singleSelect" 6 data-placement="left"
                             onmouseenter="$(this).tooltip('show')" title="Categoría (*)" ng-model="ong.tipo" ng-options="x for x in cat"
                             required>
-                <option value="" disabled selected>Seleccionar Categoría (*)</option>
-            </select>
+                        </select>
                         <div class="custom-error" ng-show="ongForm.tipo.$dirty && ongForm.tipo.$invalid">No válido:
                             <span ng-show="ongForm.tipo.$error.required">Seleccione una Categoría.</span>
                             <span ng-show="ongForm.tipo.$error.invalid">Por favor, ingrese un nombre válido.</span>
@@ -55,7 +54,7 @@
                     <input name="latitud" id="latitud" ng-value="ong.latitud" ng-model="ong.latitud" type="hidden"/>
                     <input name="longitud" id="longitud" ng-value="ong.longitud" ng-model="ong.longitud" type="hidden"/>
                    <p>
-                        <input id="ubicacion" name="ubicacion" class="form-control ng-pristine ng-invalid" type="text" title="Ubicación" 6
+                        <input id="ubicacion" name="ubicacion" class="form-control ng-pristine ng-invalid" type="text" title="Ubicación"
                             places-auto-complete types="['geocode']" on-place-changed="placeMarker()" data-placement="left" onmouseenter="$(this).tooltip('show')"
                             ng-model="ong.ubicacion" required/>
                         <div class="custom-error" ng-show="ongForm.ubicacion.$dirty && ongForm.ubicacion.$invalid">No válido:
@@ -69,8 +68,8 @@
                             <div class="col-md-offset-1 col-md-3">
                                 <p>
                                     <button type="submit" data-placement="left" onmouseenter="$(this).tooltip('show')" style="margin-top:20px" tabindex="-6" title="Crear"
-                                        class="btn btn-lg btn-success" ng-disabled="ongForm.$pristine || (ongForm.$dirty && ongForm.$invalid)"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Crear</button>
-                                    <button type="reset" data-placement="right" onmouseenter="$(this).tooltip('show')" style="margin-top:20px" title="Volver" 6
+                                        class="btn btn-lg btn-success" ng-disabled="ongForm.$pristine || (ongForm.$dirty && ongForm.$invalid)"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Editar</button>
+                                    <button type="reset" data-placement="right" onmouseenter="$(this).tooltip('show')" style="margin-top:20px" title="Volver"
                                         class="btn btn-lg btn-info" ng-click="back()">Volver <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></button>
                                 </p>
                             </div>

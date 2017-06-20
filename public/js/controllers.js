@@ -196,15 +196,19 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
 }]);
 
 mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 'OngService', function($scope,  $location, $routeParams, OngService) {
+
+    $scope.cat = ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
+
     OngService.getOneOng($routeParams.ongId).then(function(doc) {
         $scope.ong = doc.data;
+        $scope.center = [$scope.ong.latitud, $scope.ong.longitud];
+        $scope.latlng = [$scope.ong.latitud, $scope.ong.longitud];
         console.log(doc);
     }, function(response) {
         alert(response);
     });
 
     $scope.back = function() {
-        //$location.path("/");
         window.history.back();
     };
 
@@ -216,5 +220,20 @@ mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 
             console.log(response);
             alert(response);
         });
+    };
+
+    $scope.getpos = function (event) {
+        $scope.lat = event.latLng.lat();
+        $scope.lng = event.latLng.lng();
+        $scope.latlng = [event.latLng.lat(), event.latLng.lng()];
+    };
+
+    $scope.placeMarker = function(){
+        var place = this.getPlace();
+        var loc = place.geometry.location;
+        $scope.ong.latitud = loc.lat();
+        $scope.ong.longitud = loc.lng();
+        $scope.latlng = [loc.lat(), loc.lng()];
+        $scope.center = [loc.lat(), loc.lng()];
     };
 }]);
