@@ -235,3 +235,16 @@ mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 
         $scope.center = [loc.lat(), loc.lng()];
     };
 }]);
+
+mainApp.controller("SpecsOngController", ['$scope', '$routeParams', 'OngService', function ($scope, $routeParams, OngService) {
+
+    OngService.getOneOng($routeParams.ongId).then(function (doc) {
+        $scope.ong = doc.data;
+    }, function (response) {
+        alert(response);
+    });
+
+    $scope.back = function () {
+        window.history.back();
+    };
+}]);
