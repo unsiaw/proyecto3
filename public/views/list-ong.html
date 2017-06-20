@@ -14,46 +14,71 @@
             <div class="col-sm-4">
                 <div class="panel-custom" ng-if="currentUser.admin">
                     <a type="button" data-toggle="tooltip" data-placement="right" onmouseenter="$(this).tooltip('show')" title="Agregar ONG"
-                       href="/add/ong" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></a>
+                        href="/add/ong" class="btn btn-success btn-circle"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
             <div class="col-sm-6 col-md-4">
-                <form role="form">
+                <form>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                            <input type="text" class="form-control" placeholder="Buscar una ONG" ng-model="searchOng">
+                        </div>
+                    </div>
+                </form>
+                <!--<form role="form">
                     <div class="form-group has-feedback has-feedback-left">
                         <input type="text" class="form-control" placeholder="Buscar" ng-model="buscador" />
                         <i class="form-control-feedback glyphicon glyphicon-search"></i>
                     </div>
-                </form>
+                </form>-->
             </div>
         </div>
         <div class="row">
-            <table class="table table-hover">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
-                <tr class="success">
-                    <th>Nombre </th>
-                    <th>Tipo</th>
-                    <th>Ubicación</th>
-                    <th>Responsable</th>
-                    <th ng-if="currentUser.admin">Opciones</th>
-                </tr>
+                    <tr class="success">
+                        <td href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                            Nombre
+                            <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                        </td>
+                        <td href="#" ng-click="sortType = 'tipo'; sortReverse = !sortReverse">
+                            Tipo
+                            <span ng-show="sortType == 'tipo' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'tipo' && sortReverse" class="fa fa-caret-up"></span>
+                        </td>
+                        <td href="#" ng-click="sortType = 'ubicacion'; sortReverse = !sortReverse">
+                            Ubicación
+                            <span ng-show="sortType == 'ubicacion' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'ubicacion' && sortReverse" class="fa fa-caret-up"></span>
+                        </td>
+                        <td href="#" ng-click="sortType = 'responsable'; sortReverse = !sortReverse">
+                            Responsable
+                            <span ng-show="sortType == 'responsable' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'responsable' && sortReverse" class="fa fa-caret-up"></span>
+                        </td>
+
+                        <td ng-if="currentUser.admin" href="#">Opciones</td>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr class="info" ng-repeat="(id,ong) in ongs | filter: buscador">
-                    <td>{{ ong.nombre}}</td>
-                    <td>{{ ong.tipo}}</td>
-                    <td>{{ ong.ubicacion}}</td>
-                    <td>{{ ong.responsable}}</td>
-                    <td ng-if="currentUser.admin">
-                        <a onmouseenter="$(this).tooltip('show')" data-placement="left" class="btn btn-info button expand alert" title="Editar" href="/edit/ong/{{ong._id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-                        <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button"  data-toggle="modal" data-target="#delete-modal" ng-click="openModal(ong)" title="Eliminar"
-                                class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                    </td>
-                </tr>
+                    <tr class="info" ng-repeat="(id,ong) in ongs | orderBy:sortType:sortReverse  | filter: buscador | filter:searchOng">
+                        <td>{{ ong.nombre}}</td>
+                        <td>{{ ong.tipo}}</td>
+                        <td>{{ ong.ubicacion}}</td>
+                        <td>{{ ong.responsable}}</td>
+                        <td align="center" ng-if="currentUser.admin">
+                            <a onmouseenter="$(this).tooltip('show')" data-placement="left" class="btn btn-info button expand alert" title="Editar" href="/edit/ong/{{ong._id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                            <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button" data-toggle="modal" data-target="#delete-modal"
+                                ng-click="openModal(ong)" title="Eliminar" class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div id="delete-modal" class="modal fade bs-example-modal-sm" tabindex="-5" role="dialog" aria-labelledby="mySmallModalLabel">
                 <div class="modal-content">
-                  <div class="modal-container">
+                    <div class="modal-container">
                         <div class="ong-details">
                             <h4 class="modal-title" id="myModalLabel">Confirma que quiere eliminar la siguiente ONG?</h4>
 
@@ -64,10 +89,10 @@
                             </div>
                         </div>
                         <div class="options">
-                            <button onmouseenter="$(this).tooltip('show')" data-placement="left" type="button"  data-toggle="modal" ng-click="deleteOng(selected_ong._id)" data-dismiss="modal" title="Eliminar"
-                                class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <b> Eliminar</b></button>
-                            <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button"  data-toggle="modal" data-dismiss="modal" title="Cancelar"
-                                class="btn btn-warning button expand alert"><b>Cancelar </b> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                            <button onmouseenter="$(this).tooltip('show')" data-placement="left" type="button" data-toggle="modal" ng-click="deleteOng(selected_ong._id)"
+                                data-dismiss="modal" title="Eliminar" class="btn btn-danger button expand alert"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> <b> Eliminar</b></button>
+                            <button onmouseenter="$(this).tooltip('show')" data-placement="right" type="button" data-toggle="modal" data-dismiss="modal"
+                                title="Cancelar" class="btn btn-warning button expand alert"><b>Cancelar </b> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </div>
@@ -75,6 +100,3 @@
         </div>
     </fieldset>
 </div>
-
-
-                    

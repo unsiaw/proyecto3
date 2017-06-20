@@ -1,12 +1,12 @@
-mainApp.controller('MyCtrl', ['$scope', function($scope) {
+mainApp.controller('MyCtrl', ['$scope', function ($scope) {
 
     $scope.selectedOngs = [];
     $scope.ongs = [
-        {id: 1, name: 'ONG 1', cat: 'Animales', pos: [-38.7018411, -62.2724209]},
-        {id: 2, name: 'ONG 2', cat: 'Educación', pos: [-38.71, -62.2724209]},
-        {id: 3, name: 'ONG 3', cat: 'Animales', pos: [-38.72, -62.2724209]},
-        {id: 4, name: 'ONG 4', cat: 'Discapacidad', pos: [-38.73, -62.2724209]},
-        {id: 5, name: 'ONG 5', cat: 'Social', pos: [-38.74, -62.2724209]}
+        { id: 1, name: 'ONG 1', cat: 'Animales', pos: [-38.7018411, -62.2724209] },
+        { id: 2, name: 'ONG 2', cat: 'Educación', pos: [-38.71, -62.2724209] },
+        { id: 3, name: 'ONG 3', cat: 'Animales', pos: [-38.72, -62.2724209] },
+        { id: 4, name: 'ONG 4', cat: 'Discapacidad', pos: [-38.73, -62.2724209] },
+        { id: 5, name: 'ONG 5', cat: 'Social', pos: [-38.74, -62.2724209] }
     ];
 
     $scope.cat = [
@@ -82,14 +82,14 @@ mainApp.controller('MyCtrl', ['$scope', function($scope) {
     };
 }]);
 
-mainApp.controller('MapController', function($scope, $location, NgMap) {
-    $scope.fbhref=$location.absUrl();
-    NgMap.getMap().then(function(map) {
+mainApp.controller('MapController', function ($scope, $location, NgMap) {
+    $scope.fbhref = $location.absUrl();
+    NgMap.getMap().then(function (map) {
         console.log(map.getCenter().toString());
     });
 });
 
-mainApp.controller('LoginController', ['$scope', '$location', 'Flash', 'AuthService', function($scope, $location, Flash, AuthService) {
+mainApp.controller('LoginController', ['$scope', '$location', 'Flash', 'AuthService', function ($scope, $location, Flash, AuthService) {
     $scope.credentials = {
         email: "",
         password: ""
@@ -102,12 +102,12 @@ mainApp.controller('LoginController', ['$scope', '$location', 'Flash', 'AuthServ
                 $location.path('/map');
             })
             .catch(function (err) {
-                Flash.create('danger', err.data.message, 10000, { container: 'login-alert'}, true);
+                Flash.create('danger', err.data.message, 10000, { container: 'login-alert' }, true);
             });
     };
 }]);
 
-mainApp.controller('RegisterController', ['$scope', '$location', 'Flash', 'AuthService', function($scope, $location, Flash, AuthService) {
+mainApp.controller('RegisterController', ['$scope', '$location', 'Flash', 'AuthService', function ($scope, $location, Flash, AuthService) {
     $scope.credentials = {
         name: "",
         email: "",
@@ -121,35 +121,39 @@ mainApp.controller('RegisterController', ['$scope', '$location', 'Flash', 'AuthS
                 $location.path('/map');
             })
             .catch(function (err) {
-                Flash.create('danger', err.data.message, 10000, { container: 'register-alert'}, true);
+                Flash.create('danger', err.data.message, 10000, { container: 'register-alert' }, true);
             });
     };
 }]);
 
-mainApp.controller('NavigationController', ['$rootScope', '$scope', '$location', 'AuthService', function($rootScope, $scope, $location, AuthService) {
+mainApp.controller('NavigationController', ['$rootScope', '$scope', '$location', 'AuthService', function ($rootScope, $scope, $location, AuthService) {
     $rootScope.currentUser = AuthService.currentUser();
 
-    $scope.onLogout = function() {
+    $scope.onLogout = function () {
         AuthService.logout();
         $location.path('/');
     };
 }]);
 
-mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'ongs', function($scope, $location,OngService, ongs) {
+mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'ongs', function ($scope, $location, OngService, ongs) {
     $scope.ongs = ongs.data;
     $scope.selected_ong = {};
 
-    $scope.openModal = function (obj)  {
+    $scope.sortType = 'name'; // set the default sort type
+    $scope.sortReverse = false;  // set the default sort order
+    $scope.searchOng = '';     // set the default search/filter term
+
+    $scope.openModal = function (obj) {
         $scope.selected_ong = obj;
     };
 
-    $scope.showOng = function(ongId) {
+    $scope.showOng = function (ongId) {
         var ongUrl = "/ong/" + ongId;
         $location.path(ongUrl);
     };
 
-    $scope.deleteOng = function(ongId) {
-        OngService.deleteOng(ongId).then(function(data){
+    $scope.deleteOng = function (ongId) {
+        OngService.deleteOng(ongId).then(function (data) {
             OngService.getOngs().then(function (data) {
                 $scope.ongs = data.data;
                 $scope.selected_ong = {};
@@ -158,26 +162,26 @@ mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'o
     };
 }]);
 
-mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location', 'OngService', function($scope, $http, $locale, $location, OngService) {
-    $scope.cat = ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
+mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location', 'OngService', function ($scope, $http, $locale, $location, OngService) {
+    $scope.cat = ['Niños y adolescentes', 'Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
 
-    $scope.back = function() {
+    $scope.back = function () {
         //$location.path("/");
         window.history.back();
     };
 
-    $scope.saveOng = function(ong) {
-        OngService.createOng(ong).then(function(doc) {
+    $scope.saveOng = function (ong) {
+        OngService.createOng(ong).then(function (doc) {
             //var ongUrl = "/ong/" + doc.data._id;
             $location.path('/ongs');
-        }).catch(function(response) {
+        }).catch(function (response) {
             console.log(response);
             alert(response);
         });
     };
 
-    $scope.center = [-38.7018411,-62.2724209];
-    $scope.latlng = [-38.7018411,-62.2724209];
+    $scope.center = [-38.7018411, -62.2724209];
+    $scope.latlng = [-38.7018411, -62.2724209];
 
     $scope.getpos = function (event) {
         $scope.lat = event.latLng.lat();
@@ -185,7 +189,7 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
         $scope.latlng = [event.latLng.lat(), event.latLng.lng()];
     };
 
-    $scope.placeMarker = function(){
+    $scope.placeMarker = function () {
         var place = this.getPlace();
         var loc = place.geometry.location;
         $scope.ong.latitud = loc.lat();
@@ -195,24 +199,24 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
     };
 }]);
 
-mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 'OngService', function($scope,  $location, $routeParams, OngService) {
-    OngService.getOneOng($routeParams.ongId).then(function(doc) {
+mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 'OngService', function ($scope, $location, $routeParams, OngService) {
+    OngService.getOneOng($routeParams.ongId).then(function (doc) {
         $scope.ong = doc.data;
         console.log(doc);
-    }, function(response) {
+    }, function (response) {
         alert(response);
     });
 
-    $scope.back = function() {
+    $scope.back = function () {
         //$location.path("/");
         window.history.back();
     };
 
-    $scope.saveOng = function(ong) {
-        OngService.editOng(ong).then(function(doc) {
+    $scope.saveOng = function (ong) {
+        OngService.editOng(ong).then(function (doc) {
             //var ongUrl = "/ong/" + doc.data._id;
             $location.path('/ongs');
-        }).catch(function(response) {
+        }).catch(function (response) {
             console.log(response);
             alert(response);
         });
