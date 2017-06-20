@@ -137,6 +137,11 @@ mainApp.controller('NavigationController', ['$rootScope', '$scope', '$location',
 
 mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'ongs', function($scope, $location,OngService, ongs) {
     $scope.ongs = ongs.data;
+    $scope.selected_ong = {};
+
+    $scope.openModal = function (obj)  {
+        $scope.selected_ong = obj;
+    };
 
     $scope.showOng = function(ongId) {
         var ongUrl = "/ong/" + ongId;
@@ -144,9 +149,11 @@ mainApp.controller("ListOngController", ['$scope', '$location', 'OngService', 'o
     };
 
     $scope.deleteOng = function(ongId) {
-        OngService.deleteOng(ongId);
-        OngService.getOngs().then(function (data) {
-            $scope.ongs = data.data;
+        OngService.deleteOng(ongId).then(function(data){
+            OngService.getOngs().then(function (data) {
+                $scope.ongs = data.data;
+                $scope.selected_ong = {};
+            })
         });
     };
 }]);
