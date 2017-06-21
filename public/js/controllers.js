@@ -9,13 +9,13 @@ mainApp.controller('MapController', ['$scope', 'ongs', function ($scope, ongs) {
     $scope.selectionsChanged = function () {
         $scope.selectedOngs = [];
         $scope.selectedValues.forEach(function (cid) {
-            var ongs = $scope.ongs.filter(function(ong) {
+            var ongs = $scope.ongs.filter(function (ong) {
                 return cid.text === ong.tipo;
             });
             $scope.selectedOngs = $scope.selectedOngs.concat(ongs);
         });
         // Repinto el mapa
-        if ($scope.selectedOngs.length>0) {
+        if ($scope.selectedOngs.length > 0) {
             $scope.zoomToIncludeMarkers();
         }
     };
@@ -30,6 +30,14 @@ mainApp.controller('MapController', ['$scope', 'ongs', function ($scope, ongs) {
         if ($scope.selectedOngs.length == 1) {
             $scope.map.setZoom(12);
         }
+    };
+    $scope.showDetail = function (e, ong) {
+        $scope.ongtool = ong;
+        $scope.map.showInfoWindow('foo-iw', ong._id);
+    };
+
+    $scope.hideDetail = function () {
+        $scope.map.hideInfoWindow('foo-iw');
     };
 }]);
 
@@ -141,7 +149,7 @@ mainApp.controller("NewOngController", ['$scope', '$http', '$locale', '$location
 
 mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 'OngService', function ($scope, $location, $routeParams, OngService) {
 
-    $scope.cat = ['Niños y adolescentes','Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
+    $scope.cat = ['Niños y adolescentes', 'Ancianos', 'Familia', 'Comedores', 'Educación', 'Salud', 'Personas con discapacidad', 'Indigencia', 'Reinserción social', 'Medio ambiente', 'Animales', 'Otros'];
 
     OngService.getOneOng($routeParams.ongId).then(function (doc) {
         $scope.ong = doc.data;
@@ -170,7 +178,7 @@ mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 
         $scope.latlng = [event.latLng.lat(), event.latLng.lng()];
     };
 
-    $scope.placeMarker = function(){
+    $scope.placeMarker = function () {
         var place = this.getPlace();
         var loc = place.geometry.location;
         $scope.ong.latitud = loc.lat();
