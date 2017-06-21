@@ -4,6 +4,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
 var passport = require('passport');
+var seeder = require('mongoose-seed');
+var seedingData = require('./data');
+
 
 // Defining models
 require('./server/models');
@@ -25,6 +28,34 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')));
 // Then, search for the rest of the routes.
 app.use('/', routes);
+
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send({ message: "Invalid token"});
+    }
+});
+
+
+// Connect to MongoDB via Mongoose
+seeder.connect(config.database, function() {
+    console.log('Seeding DB');
+    // Load Mongoose models
+    seeder.loadModels([
+        'server/api/ong/model.js',
+        'server/api/comment/model.js',
+        'server/api/user/model.js'
+    ]);
+
+    // Clear specified collections
+    seeder.clearModels(['Ong', 'Comment', 'User'], function() {
+
+        // Callback to populate DB once collections have been cleared
+        seeder.populateModels(seedingData, function() {
+            console.log('Seeding ready');
+        });
+
+    });
+});
 
 // Connect to MongoDB
 mongoose.connect(config.database);

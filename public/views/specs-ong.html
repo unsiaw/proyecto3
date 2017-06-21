@@ -41,7 +41,7 @@
                     </li>
                 </ul>
                 <!--  comentario Form -->
-                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario)" ng-if="currentUser" novalidate>
+                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario); comentarioForm.$setPristine()" ng-if="currentUser" novalidate>
                     <h4>Enviar un comentario</h4>
                     <fieldset class="form-group">
 
