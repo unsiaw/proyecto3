@@ -26,6 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Then, search for the rest of the routes.
 app.use('/', routes);
 
+app.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send({ message: "Invalid token"});
+    }
+});
+
 // Connect to MongoDB
 mongoose.connect(config.database);
 mongoose.connection.on('connected', function() {
