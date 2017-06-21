@@ -26,7 +26,8 @@ var ongSchema = new mongoose.Schema({
     },
     telefono: {
         type: String,
-    }
+    },
+    comentarios: [ mongoose.model('Comment').schema ]
 });
 
 module.exports = mongoose.model('Ong', ongSchema);

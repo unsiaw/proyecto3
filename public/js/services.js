@@ -104,5 +104,14 @@ mainApp.service("OngService", ['$http', function($http) {
         }, function(response) {
             alert("Error deleting this Ong.");
         });
-    }
+    };
+    this.enviarComentario = function(ongId, comentario) {
+        var url = "/api/comment/" + ongId;
+        return $http.post(url, comentario).
+        then(function(response) {
+            return response;
+        }, function(response) {
+            alert("Error sending Comment.");
+        });
+    };
 }]);
