@@ -24,11 +24,11 @@
                 <!--  Ong comentarios List -->
                 <ul>
                     <h3> Comentarios </h3>
-                    <li ng-repeat="comentario in product.comentarios">
+                    <li ng-repeat="comentario in ong.comentarios">
 
                         <blockquote>
-                            {{comentario.body}}
-                            <cite class="clearfix">—{{comentario.autor}}  on {{comentario.createdOn | date}}</cite>
+                            {{comentario.texto}}
+                            <cite class="clearfix">—{{comentario.autor.nombre}}  on {{comentario.fecha | date}}</cite>
                         </blockquote>
                     </li>
                 </ul>
@@ -42,7 +42,7 @@
                     <!--  comentario Form -->
                     <h4>Enviar un comentario</h4>
                     <fieldset class="form-group">
-                        <textarea ng-model="comentarios.comentario.body" class="form-control" placeholder="Escribir un pequeño comentario sobre la ONG..."
+                        <textarea ng-model="comentarios.comentario.texto" class="form-control" placeholder="Escribir un pequeño comentario sobre la ONG..."
                             title="comentario"></textarea>
                     </fieldset>
                     <!--<fieldset class="form-group">

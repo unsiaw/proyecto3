@@ -4,7 +4,7 @@ var utils = require('../../utils');
 
 // TODO: Sanitizar para evitar inyecciones!
 exports.list_all = function(req, res) {
-    Ong.find({},function(err, ong) {
+    Ong.find({},' -comentarios',function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
@@ -14,7 +14,7 @@ exports.list_all = function(req, res) {
 };
 
 exports.list_one = function(req, res) {
-    Ong.findById(req.params.id,function(err, ong) {
+    Ong.findById(req.params.id).populate('comentarios').exec(function(err, ong) {
         if (err) {
             utils.sendJSONresponse(res, 400, {message: "No se pudo procesar la solicitud"});
             return ;
