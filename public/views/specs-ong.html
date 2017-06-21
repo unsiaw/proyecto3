@@ -4,15 +4,24 @@
         <div class="col-md-6">
             <!--DESCRIPCION de la ONG-->
             <div>
-                <h2>ONG</h2><hr class="colorgraph">
+                <h2>ONG</h2>
+                <hr class="colorgraph">
                 <dl class="list-unstyled">
-                    <dt><h4><strong>Nombre:</strong></h4></dt>
+                    <dt>
+                        <h4><strong>Nombre:</strong></h4>
+                    </dt>
                     <dd class="tab">{{ong.nombre}}</dd>
-                    <dt><h4><strong>Tipo:</strong></h4></dt>
+                    <dt>
+                        <h4><strong>Tipo:</strong></h4>
+                    </dt>
                     <dd class="tab">{{ong.tipo}}</dd>
-                    <dt><h4><strong>Ubicación:</strong></h4></dt>
+                    <dt>
+                        <h4><strong>Ubicación:</strong></h4>
+                    </dt>
                     <dd class="tab">{{ong.ubicacion}}</dd>
-                    <dt><h4><strong>Responsable:</strong></h4></dt>
+                    <dt>
+                        <h4><strong>Responsable:</strong></h4>
+                    </dt>
                     <dd class="tab">{{ong.responsable}}</dd>
                 </dl>
                 </ul>
@@ -32,17 +41,34 @@
                     </li>
                 </ul>
                 <!--  comentario Form -->
-                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario)" ng-if="currentUser">
+                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario)" ng-if="currentUser" novalidate>
                     <h4>Enviar un comentario</h4>
                     <fieldset class="form-group">
-                        <input ng-model="comentario.autor" type="text" class="form-control" placeholder="Ingresa tu nombre" title="Nombre"/>
+
+
+                        <input id="autor" name="autor" ng-model="comentario.autor" ng-minlength="4" ng-maxlength="40"  type="text" tabindex="1" class="form-control ng-pristine ng-invalid"
+                            placeholder="Ingresa tu nombre" title="Nombre" onmouseenter="$(this).tooltip('show')" required>
+                        <div class="custom-error" ng-show="comentarioForm.autor.$dirty && comentarioForm.autor.$invalid">No válido:
+                            <span ng-show="comentarioForm.autor.$error.required"> Se requiere un Nombre.</span>
+                            <span class="error" ng-show="comentarioForm.autor.$error.minlength"> Muy corto!</span>
+                            <span class="error" ng-show="comentarioForm.autor.$error.maxlength"> Muy largo!</span>
+                        </div>
                     </fieldset>
                     <fieldset class="form-group">
-                        <textarea ng-model="comentario.texto" class="form-control" placeholder="Escribir un pequeño comentario sobre la ONG..."
-                            title="comentario"></textarea>
+
+
+                        <textarea id="texto" name="texto" ng-model="comentario.texto" ng-minlength="4" ng-maxlength="200" tabindex="2" class="form-control ng-pristine ng-invalid" placeholder="Escribir un pequeño comentario sobre la ONG..."
+                            title="comentario" required></textarea>
+                        <div class="custom-error" ng-show="comentarioForm.texto.$dirty && comentarioForm.texto.$invalid">No válido:
+                            <span ng-show="comentarioForm.texto.$error.required"> Se requiere un Nombre.</span>
+                            <span class="error" ng-show="comentarioForm.texto.$error.minlength"> Mensaje muy corto!</span>
+                            <span class="error" ng-show="comentarioForm.texto.$error.maxlength"> Mensaje demasiado largo!</span>
+                        </div>
                     </fieldset>
                     <fieldset class="form-group">
-                        <button type="submit" class="btn btn-primary pull-right">Enviar comentario</button>
+                        <button type="submit" class="btn btn-primary pull-right" title="Enviar" tabindex="3" data-placement="left" onmouseenter="$(this).tooltip('show')"
+                            ng-disabled="comentarioForm.$pristine || (comentarioForm.$dirty && comentarioForm.$invalid)"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>Enviar comentario</button>
+
                     </fieldset>
                 </form>
             </div>
