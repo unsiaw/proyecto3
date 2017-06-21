@@ -22,9 +22,6 @@ mainApp.config(['$routeProvider', '$locationProvider', '$httpProvider', 'jwtOpti
                     }
                 }
             })
-            .when('/about', {
-                templateUrl: 'views/about.html'
-            })
             .when('/contact', {
                 templateUrl: 'views/contact.html'
             })
@@ -32,7 +29,7 @@ mainApp.config(['$routeProvider', '$locationProvider', '$httpProvider', 'jwtOpti
                 templateUrl: 'views/credits.html'
             })
             .when('/', {
-                templateUrl: 'views/index.html'
+                templateUrl: 'views/index.html',
             })
             .when("/ongs", {
                 templateUrl: "views/list-ong.html",
