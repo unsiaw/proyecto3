@@ -6,7 +6,7 @@
             <h3 class="form-signin-heading">Registro <small>Ingrese la información solicitada</small></h3>
             <hr class="colorgraph">
             <div class="form-group">
-                <input type="text" name="name" id="name" ng-minlength="4" ng-maxlength="12" class="form-control input-lg ng-pristine ng-invalid"
+                <input type="text" name="name" id="name" ng-minlength="4" ng-maxlength="32" class="form-control input-lg ng-pristine ng-invalid"
                     placeholder="Nombre" tabindex="1" ng-model="rc.credentials.name" required>
                 <div class="custom-error" ng-show="registerForm.name.$dirty && registerForm.name.$invalid">No válido:
                     <span ng-show="registerForm.name.$error.required">Ingrese un Nombre.</span>
