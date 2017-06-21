@@ -182,6 +182,11 @@ mainApp.controller("EditOngController", ['$scope', '$location', '$routeParams', 
 
 mainApp.controller("SpecsOngController", ['$scope', '$routeParams', 'OngService', function ($scope, $routeParams, OngService) {
 
+    $scope.comentario = {
+        autor: "",
+        texto: ""
+    };
+
     OngService.getOneOng($routeParams.ongId).then(function (doc) {
         $scope.ong = doc.data;
     }, function (response) {
@@ -191,4 +196,20 @@ mainApp.controller("SpecsOngController", ['$scope', '$routeParams', 'OngService'
     $scope.back = function () {
         window.history.back();
     };
+
+    $scope.addComentario = function (comentario) {
+        OngService.enviarComentario($routeParams.ongId, comentario)
+            .then(function () {
+                OngService.getOneOng($routeParams.ongId).then(function (doc) {
+                    $scope.ong = doc.data;
+                    $scope.comentario = { texto: "", autor: ""};
+                }, function (response) {
+                    alert(response);
+                });
+            })
+            .catch(function (err) {
+                alert(response);
+            });
+    };
 }]);
+

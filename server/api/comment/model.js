@@ -3,8 +3,8 @@ var config = require('../../../config');
 
 var commentSchemma = new mongoose.Schema({
     autor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true
     },
     texto: {
         type: String,

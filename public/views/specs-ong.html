@@ -24,33 +24,25 @@
                 <!--  Ong comentarios List -->
                 <ul>
                     <h3> Comentarios </h3>
-                    <li ng-repeat="comentario in ong.comentarios">
-
+                    <li ng-repeat="com in ong.comentarios">
                         <blockquote>
-                            {{comentario.texto}}
-                            <cite class="clearfix">—{{comentario.autor.nombre}}  on {{comentario.fecha | date}}</cite>
+                            {{com.texto}}
+                            <cite class="clearfix">—{{com.autor}}  on {{com.fecha | date}}</cite>
                         </blockquote>
                     </li>
                 </ul>
                 <!--  comentario Form -->
-                <form name="comentarioForm" role="form" ng-controller="comentarioController as comentarios" ng-submit="comentarios.addcomentario(product)">
-                    <!--  Live comentario -->
-                    <blockquote ng-show="comentarios.comentario.stars">
-                        {{comentarios.comentario.body}}
-                        <cite class="clearfix">—{{comentarios.comentario.autor}}</cite>
-                    </blockquote>
-                    <!--  comentario Form -->
+                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario)">
                     <h4>Enviar un comentario</h4>
                     <fieldset class="form-group">
-                        <textarea ng-model="comentarios.comentario.texto" class="form-control" placeholder="Escribir un pequeño comentario sobre la ONG..."
+                        <input ng-model="comentario.autor" type="text" class="form-control" placeholder="Ingresa tu nombre" title="Nombre"/>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <textarea ng-model="comentario.texto" class="form-control" placeholder="Escribir un pequeño comentario sobre la ONG..."
                             title="comentario"></textarea>
                     </fieldset>
-                    <!--<fieldset class="form-group">
-                        <input ng-model="comentarios.comentario.autor" type="email" class="form-control" placeholder="jimmyDean@sausage.com" title="Email"
-                        />
-                    </fieldset>-->
                     <fieldset class="form-group">
-                        <input type="submit" class="btn btn-primary pull-right" value="Enviar comentario" />
+                        <button type="submit" class="btn btn-primary pull-right">Enviar comentario</button>
                     </fieldset>
                 </form>
             </div>
