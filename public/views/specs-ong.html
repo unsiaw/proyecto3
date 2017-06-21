@@ -32,7 +32,7 @@
                     </li>
                 </ul>
                 <!--  comentario Form -->
-                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario)">
+                <form name="comentarioForm" role="form" ng-submit="addComentario(comentario)" ng-if="currentUser">
                     <h4>Enviar un comentario</h4>
                     <fieldset class="form-group">
                         <input ng-model="comentario.autor" type="text" class="form-control" placeholder="Ingresa tu nombre" title="Nombre"/>

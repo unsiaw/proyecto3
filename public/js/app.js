@@ -1,7 +1,7 @@
 var mainApp = angular.module('maps', ['ngRoute', 'ngMap', 'ngFlash', 'angular-jwt', 'ngTagsInput']);
 
-mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
-    function($routeProvider, $locationProvider, jwtOptionsProvider) {
+mainApp.config(['$routeProvider', '$locationProvider', '$httpProvider', 'jwtOptionsProvider',
+    function($routeProvider, $locationProvider, $httpProvider, jwtOptionsProvider) {
         $routeProvider
             .when('/login', {
                 templateUrl: 'views/login.html',
@@ -71,7 +71,7 @@ mainApp.config(['$routeProvider', '$locationProvider', 'jwtOptionsProvider',
                 $location.path('/login')
             }]
         });
-
+        $httpProvider.interceptors.push('jwtInterceptor');
     }]);
 
 mainApp.run(['$rootScope', '$location', 'AuthService', 'authManager', function($rootScope, $location, AuthService, authManager) {
