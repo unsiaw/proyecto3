@@ -8,7 +8,7 @@ Levantar MongoDB
 
 ```
 mongod
-``
+```
 
 ### Paso 2
 
